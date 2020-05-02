@@ -34,7 +34,16 @@ helm upgrade -i --atomic -f argo-values.yaml argo -n argocd argo/argo-cd
 
 rm argo-values.yaml
 
+PASSWORD="$(kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2)"
+
 echo "
 Username: admin
-Password: $(kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2)
+Password: ${PASSWORD}
 "
+
+argocd login 192.168.1.201 --username admin --password "$PASSWORD"
+
+argocd repo add git@github.com:LukeChannings/k8s-at-home.git --insecure-ignore-host-key --ssh-private-key-path ~/Projects/k8s-at-home/secrets/argocd-github
+
+argocd app create --name apps --repo git@github.com:LukeChannings/k8s-at-home.git --dest-server https://kubernetes.default.svc --dest-namespace default --path apps/apps
+argocd app sync apps
