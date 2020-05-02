@@ -41,3 +41,15 @@ prometheus-operator:
           secretName: alertmanager-tls
       hosts:
         - alertmanager.private.channings.me
+  grafana:
+    ingress:
+      enabled: true
+      annotations:
+        ingress.class: internal
+        cert-manager.io/cluster-issuer: letsencrypt-production
+      tls:
+        - hosts:
+            - grafana.private.channings.me
+          secretName: grafana-tls
+      hosts:
+        - grafana.private.channings.me
