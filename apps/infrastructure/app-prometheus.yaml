@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  destination:
+    namespace: prometheus
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/infrastructure/prometheus
+    repoURL: 'git@github.com:LukeChannings/k8s-at-home.git'
+    targetRevision: HEAD
+  project: infrastructure

@@ -1,0 +1,44 @@
+---
+prometheus-operator:
+  # k3s doesn't use etcd normally.
+  kubeEtcd:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  prometheus:
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            volumeName: prometheus
+            storageClassName: local-storage
+            accessModes: ["ReadWriteMany"]
+            resources:
+              requests:
+                storage: 150Gi
+    ingress:
+      enabled: true
+      annotations:
+        ingress.class: internal
+        cert-manager.io/cluster-issuer: letsencrypt-production
+      tls:
+        - hosts:
+            - prometheus.private.channings.me
+          secretName: prometheus-tls
+      hosts:
+        - prometheus.private.channings.me
+  alertmanager:
+    ingress:
+      enabled: true
+      annotations:
+        ingress.class: internal
+        cert-manager.io/cluster-issuer: letsencrypt-production
+      tls:
+        - hosts:
+            - alertmanager.private.channings.me
+          secretName: alertmanager-tls
+      hosts:
+        - alertmanager.private.channings.me
+  grafana:
+    # We'll deploy this separately.
+    enabled: false
