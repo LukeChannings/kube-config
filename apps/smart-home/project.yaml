@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: smart-home
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: Critical applications upon which all other apps in the cluster depend
+  destinations:
+    - namespace: home-assistant
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - '*'

@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: smart-home
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/smart-home
+    repoURL: 'git@github.com:LukeChannings/k8s-at-home.git'
+    targetRevision: HEAD
+  project: default
