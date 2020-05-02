@@ -16,4 +16,4 @@ yamllint -c .yamllint.yaml .
 
 shellcheck -s bash ./**/*.sh
 
-kubeval --skip-kinds SealedSecret,AppProject,Application -d apps
+kubeval --skip-kinds SealedSecret,AppProject,Application,Certificate,ClusterIssuer,SealedSecret -i 'Chart.yaml,requirements.yaml,values.yaml,cert-manager.crds.yaml' -d apps

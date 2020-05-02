@@ -1,0 +1,3 @@
+---
+name: ingress-controller
+namespace: haproxy
