@@ -5,7 +5,10 @@ prometheus-operator:
     enabled: false
   kubeProxy:
     enabled: false
+  nodeExporter:
+    enabled: true
   prometheus:
+    enabled: false
     prometheusSpec:
       storageSpec:
         volumeClaimTemplate:
@@ -28,6 +31,7 @@ prometheus-operator:
       hosts:
         - prometheus.private.channings.me
   alertmanager:
+    enabled: false
     ingress:
       enabled: true
       annotations:
