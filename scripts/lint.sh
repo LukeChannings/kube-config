@@ -14,4 +14,4 @@ set -e -o pipefail
 
 yamllint -c .yamllint.yaml .
 
-shellcheck -S warning ./**/*.sh
+shellcheck -s bash ./**/*.sh
