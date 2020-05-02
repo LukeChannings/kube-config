@@ -1,13 +1,14 @@
 ---
-ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
-  path: /
-  hosts:
-    - home-assistant.private.channings.me
-  tls:
-    - secretName: home-assistant-tls
-      hosts:
-        - home-assistant.private.channings.me
-hostNetwork: true
+home-assistant:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+    path: /
+    hosts:
+      - home-assistant.private.channings.me
+    tls:
+      - secretName: home-assistant-tls
+        hosts:
+          - home-assistant.private.channings.me
+  hostNetwork: true
