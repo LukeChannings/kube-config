@@ -15,7 +15,7 @@ This repo contains the Argo app-of-apps configuration, which installs Argo proje
 
 ### k3s
 
-k3s is installed with as little as possible. There is no **Traefik** (we will use our own ingress controller) or **servicelb** (we're using metallb) installed.
+k3s is installed with as little as possible. There is no [**Traefik**](https://containo.us/traefik/) (we will use our own ingress controller) or **servicelb** (we're using metallb) installed.
 
 ### metallb
 
@@ -35,6 +35,8 @@ I test with:
 
 Run `ip a` and note the IP address, and then run `iperf -s` on one of the pods.
 Use `iperf -c <IP>` on all other nodes. They should all be communicating at roughly network speeds.
+
+Note: [`krun`](https://github.com/LukeChannings/.config/blob/master/fish/functions/krun.fish) is a custom fish script.
 
 ### Exec format error
 
