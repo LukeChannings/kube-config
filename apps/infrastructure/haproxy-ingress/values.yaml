@@ -1,8 +1,8 @@
 ---
 kubernetes-ingress:
   controller:
-    kind: DaemonSet
-    replicaCount: 3
+    kind: Deployment
+    replicaCount: 1
     livenessProbe:
       failureThreshold: 3
       initialDelaySeconds: 0
@@ -21,20 +21,12 @@ kubernetes-ingress:
       scheme: HTTP
       successThreshold: 1
       timeoutSeconds: 1
-    ingressClass: haproxy-private
+    ingressClass: internal
     defaultTLSSecret:
       enabled: true
       secret: null
-    # nodeSelector:
-    #   kubernetes.io/arch: amd64
     service:
       type: NodePort
-    daemonset:
-      useHostPort: false
-      hostPorts:
-        http: 80
-        https: 443
-        stat: 1024
   defaultBackend:
     replicaCount: 1
     nodeSelector:
