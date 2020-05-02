@@ -4,6 +4,7 @@ home-assistant:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-production
+      ingress.class: haproxy-private
     path: /
     hosts:
       - home-assistant.private.channings.me
