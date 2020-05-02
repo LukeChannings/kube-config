@@ -9,6 +9,8 @@ kubernetes-ingress:
       secret: haproxy-default-tls
     service:
       type: NodePort
+    nodeSelector:
+      kubernetes.io/arch: amd64
   defaultBackend:
     replicaCount: 1
     nodeSelector:
