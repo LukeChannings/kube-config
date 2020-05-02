@@ -5,10 +5,8 @@ prometheus-operator:
     enabled: false
   kubeProxy:
     enabled: false
-  nodeExporter:
-    enabled: true
   prometheus:
-    enabled: false
+    enabled: true
     prometheusSpec:
       storageSpec:
         volumeClaimTemplate:
@@ -31,7 +29,7 @@ prometheus-operator:
       hosts:
         - prometheus.private.channings.me
   alertmanager:
-    enabled: false
+    enabled: true
     ingress:
       enabled: true
       annotations:
@@ -43,6 +41,3 @@ prometheus-operator:
           secretName: alertmanager-tls
       hosts:
         - alertmanager.private.channings.me
-  grafana:
-    # We'll deploy this separately.
-    enabled: false

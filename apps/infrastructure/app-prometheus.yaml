@@ -6,10 +6,10 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: prometheus
+    namespace: monitoring
     server: 'https://kubernetes.default.svc'
   source:
-    path: apps/infrastructure/prometheus
+    path: apps/infrastructure/monitoring
     repoURL: 'git@github.com:LukeChannings/k8s-at-home.git'
     targetRevision: HEAD
   project: infrastructure

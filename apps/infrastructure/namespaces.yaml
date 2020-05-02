@@ -17,4 +17,4 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: prometheus
+  name: monitoring
