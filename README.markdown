@@ -1,5 +1,7 @@
 # Luke's k8s config
 
+![Lint Status](https://github.com/LukeChannings/k8s-at-home/workflows/Lint/badge.svg)
+
 All of these scripts and configurations are specific to my home cluster. Do not expect any configurations to "just work" if you plan on using them.
 
 This repo contains the Argo app-of-apps configuration, which installs Argo projects and apps. See [`apps/argo`](./apps/argo).
