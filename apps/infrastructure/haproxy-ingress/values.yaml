@@ -3,28 +3,10 @@ kubernetes-ingress:
   controller:
     kind: Deployment
     replicaCount: 1
-    livenessProbe:
-      failureThreshold: 3
-      initialDelaySeconds: 0
-      path: /healthz
-      periodSeconds: 15
-      port: 1042
-      scheme: HTTP
-      successThreshold: 1
-      timeoutSeconds: 1
-    readinessProbe:
-      failureThreshold: 3
-      initialDelaySeconds: 0
-      path: /healthz
-      periodSeconds: 15
-      port: 1042
-      scheme: HTTP
-      successThreshold: 1
-      timeoutSeconds: 1
     ingressClass: internal
     defaultTLSSecret:
       enabled: true
-      secret: null
+      secret: haproxy-default-tls
     service:
       type: NodePort
   defaultBackend:
