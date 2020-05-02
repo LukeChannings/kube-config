@@ -9,7 +9,7 @@ spec:
     namespace: monitoring
     server: 'https://kubernetes.default.svc'
   source:
-    path: apps/infrastructure/monitoring
+    path: apps/infrastructure/prometheus
     repoURL: 'git@github.com:LukeChannings/k8s-at-home.git'
     targetRevision: HEAD
   project: infrastructure

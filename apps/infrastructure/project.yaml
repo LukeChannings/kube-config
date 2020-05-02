@@ -20,7 +20,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: argocd
       server: https://kubernetes.default.svc
-    - namespace: prometheus
+    - namespace: monitoring
       server: https://kubernetes.default.svc
   sourceRepos:
     - '*'
