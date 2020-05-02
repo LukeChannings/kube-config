@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  destination:
+    namespace: cert-manager
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/infrastructure/cert-manager
+    repoURL: 'git@github.com:LukeChannings/k8s-at-home.git'
+    targetRevision: HEAD
+  project: infrastructure
