@@ -15,3 +15,5 @@ fi
 yamllint -c .yamllint.yaml .
 
 shellcheck -s bash ./**/*.sh
+
+kubeval --skip-kinds SealedSecret,AppProject,Application -d apps
