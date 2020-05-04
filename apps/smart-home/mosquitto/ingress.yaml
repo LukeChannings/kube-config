@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mosquitto
+  namespace: mosquitto
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    ingress.class: internal
+    haproxy.org/ssl-passthrough: "true"
+spec:
+  tls:
+    - hosts:
+        - mqtt.private.channings.me
+      secretName: mosquitto-tls
+  rules:
+    - host: mqtt.private.channings.me
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mosquitto
+              servicePort: mqtts
