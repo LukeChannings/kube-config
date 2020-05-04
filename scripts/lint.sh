@@ -16,4 +16,4 @@ yamllint -c .yamllint.yaml .
 
 shellcheck -s bash ./**/*.sh
 
-kubeval --skip-kinds SealedSecret,AppProject,Application,Certificate,ClusterIssuer,SealedSecret -i 'Chart.yaml,requirements.yaml,values.yaml,cert-manager.crds.yaml' -d apps
+kubeval -i '(Chart|values|requirements|.*\.crds?)\.yaml$' -d ./apps --additional-schema-locations file://./crds
