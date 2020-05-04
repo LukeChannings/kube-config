@@ -1,0 +1,16 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitor-haproxy
+  namespace: haproxy-ingress
+  labels:
+    release: prometheus
+spec:
+  endpoints:
+    - interval: 3s
+      path: /metrics
+      targetPort: stat
+  selector:
+    matchLabels:
+      app: haproxy-ingress
