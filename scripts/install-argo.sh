@@ -12,13 +12,11 @@ controller:
   metrics:
     enabled: true
 server:
-  service:
-    type: LoadBalancer
-    loadBalancerIP: "192.168.1.201"
   ingress:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-production
+      ingress.class: internal
       haproxy.org/ssl-redirect: true
       haproxy.org/ssl-passthrough: true
     hosts:
@@ -30,7 +28,7 @@ server:
 EOF
 
 # https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
-helm upgrade -i --atomic -f argo-values.yaml argo -n argocd argo/argo-cd
+helm upgrade -i -f argo-values.yaml argo -n argocd argo/argo-cd
 
 rm argo-values.yaml
 
