@@ -9,6 +9,8 @@ kubernetes-ingress:
       secret: haproxy-ingress/haproxy-default-tls
     service:
       type: NodePort
+    publishService:
+      enabled: true
     nodeSelector:
       kubernetes.io/arch: amd64
   defaultBackend:
