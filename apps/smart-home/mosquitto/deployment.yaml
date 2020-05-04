@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  namespace: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mosquitto
+  template:
+    metadata:
+      labels:
+        name: mosquitto
+      namespace: mosquitto
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - sentinel
+      containers:
+        - name: mosquitto
+          image: eclipse-mosquitto:1.6.9
+          ports:
+            - containerPort: 8883
+              name: mqtts
+          readinessProbe:
+            tcpSocket:
+              port: 8883
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8883
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - mountPath: /mosquitto/data
+              name: mosquitto-persistence
+            - mountPath: /tls
+              name: tls
+              readOnly: true
+            - mountPath: /mosquitto/config
+              name: config
+            - mountPath: /secret
+              name: password-secret
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: mosquitto-persistence
+          persistentVolumeClaim:
+            claimName: mosquitto-data
+        - name: tls
+          secret:
+            secretName: mosquitto-tls
+        - name: config
+          configMap:
+            name: mosquitto
+        - name: password-secret
+          secret:
+            secretName: mosquitto-password

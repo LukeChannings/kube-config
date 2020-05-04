@@ -8,9 +8,11 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
-  description: Critical applications upon which all other apps in the cluster depend
+  description: Services for managing and automating the home
   destinations:
     - namespace: home-assistant
+      server: https://kubernetes.default.svc
+    - namespace: mosquitto
       server: https://kubernetes.default.svc
   sourceRepos:
     - '*'
