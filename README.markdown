@@ -4,7 +4,7 @@
 
 All of these scripts and configurations are specific to my home cluster. Do not expect any configurations to "just work" if you plan on using them.
 
-This repo contains the Argo app-of-apps configuration, which installs Argo projects and apps. See [`apps/argo`](./apps/argo).
+This repo contains the Argo app-of-apps configuration, which installs Argo projects and apps. See [`apps/apps`](./apps/apps).
 
 ## Scripts
 
@@ -40,6 +40,13 @@ Use `iperf -c <IP>` on all other nodes. They should all be communicating at roug
 
 Note: [`krun`](https://github.com/LukeChannings/.config/blob/master/fish/functions/krun.fish) is a custom fish script.
 
+If you find there is no communication between nodes, try:
+
+1. restarting k3s: `sudo systemctl restart k3s` on the master node
+2. Restarting all nodes
+3. Destroying the cluster and starting again
+4. Ensure routes are correctly set up on the nodes, iptables is configured, etc. See also: [k3s known issues](https://rancher.com/docs/k3s/latest/en/known-issues/)
+
 ### Exec format error
 
 Caused by an x86 image running on ARM.
@@ -51,6 +58,21 @@ You can either build your own ARM image, or use the following to de-select ARM m
 nodeSelector:
   kubernetes.io/arch: amd64
 ```
+
+### mlock error
+
+I experienced the Argo Application Controller in a crash loop, tailing the logs I found:
+
+```
+runtime: mlock of signal stack failed: 12
+runtime: increase the mlock limit (ulimit -l) or
+runtime: update your kernel to 5.3.15+, 5.4.2+, or 5.5+
+fatal error: mlock failed
+```
+
+Manually upgrading the kernel to `5.4.28` appears to have fixed the issue.
+
+For Ubuntu, download and `dpkg -i *.deb`: [https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.28/](https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.28/) the filed listed under `Build for amd64 succeeded`, except `lowlatency` labelled packages.
 
 ## Nodes
 
