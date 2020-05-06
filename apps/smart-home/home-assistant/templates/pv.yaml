@@ -6,7 +6,7 @@ metadata:
   namespace: home-assistant
 spec:
   capacity:
-    storage: 30Gi
+    storage: 40Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
