@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres
+  name: home-assistant-config
   namespace: home-assistant
 spec:
   capacity:
@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: "/data/home-assistant"
+    path: "/data/home-assistant-config"
   nodeAffinity:
     required:
       nodeSelectorTerms:
