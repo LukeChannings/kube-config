@@ -5,4 +5,4 @@ dependencies:
     repository: https://kubernetes-charts.storage.googleapis.com/
   - name: postgresql
     version: 0.12.4
-    repository: https://charts.bitnami.com/bitnami
+    repository: https://charts.bitnami.com/bitnami/
