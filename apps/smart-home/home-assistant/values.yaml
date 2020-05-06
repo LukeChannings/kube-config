@@ -8,11 +8,26 @@ home-assistant:
     path: /
     hosts:
       - home-assistant.private.channings.me
+      - home-assistant.channings.me
     tls:
       - secretName: home-assistant-tls
         hosts:
           - home-assistant.private.channings.me
+          - home-assistant.channings.me
   hostNetwork: true
+  git:
+    enabled: true
+    repo: git@github.com:LukeChannings/home-assistant-config.git
+    secret: github-deploy-key
+    user:
+      name: "Luke Channings"
+      email: "luke+k8s-hass-sync@channings.me"
+  persistence:
+    storageClass: local-storage
+  monitoring:
+    enabled: true
+    serviceMonitor:
+      enabled: true
 postgresql:
   rbac:
     create: true
