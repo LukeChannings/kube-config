@@ -13,21 +13,21 @@ home-assistant:
         hosts:
           - home-assistant.private.channings.me
   hostNetwork: true
-postgres:
+postgresql:
   rbac:
     create: true
-existingSecret: postgres-postgresql
-postgresqlDatabase: home-assistant
-persistence:
-  enabled: true
-  storageClass: "local-storage"
-  accessModes:
-    - ReadWriteOnce
-  size: 30Gi
-metrics:
-  enabled: true
-  serviceMonitor:
+  existingSecret: postgres-postgresql
+  postgresqlDatabase: home-assistant
+  persistence:
     enabled: true
-securityContext:
-  enabled: true
-  runAsUser: 1000
+    storageClass: "local-storage"
+    accessModes:
+      - ReadWriteOnce
+    size: 30Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  securityContext:
+    enabled: true
+    runAsUser: 1000
