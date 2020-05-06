@@ -24,6 +24,9 @@ home-assistant:
       email: "luke+k8s-hass-sync@channings.me"
   persistence:
     storageClass: local-storage
+    subPath: 'config'
+    accessModes:
+      - ReadWriteMany
   monitoring:
     enabled: true
     serviceMonitor:
@@ -37,8 +40,9 @@ postgresql:
     enabled: true
     storageClass: "local-storage"
     accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany
     size: 30Gi
+    subPath: 'postgres'
   metrics:
     enabled: true
     serviceMonitor:
