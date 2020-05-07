@@ -1,7 +1,8 @@
 ---
 kubernetes-ingress:
   controller:
-    kind: DaemonSet
+    kind: Deployment
+    replicaCount: 2
     ingressClass: internal
     defaultTLSSecret:
       enabled: true
