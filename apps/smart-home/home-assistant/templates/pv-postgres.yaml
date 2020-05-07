@@ -8,11 +8,11 @@ spec:
   capacity:
     storage: 30Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: "/data/home-assistant"
+    path: "/data/home-assistant-postgres"
   nodeAffinity:
     required:
       nodeSelectorTerms:
