@@ -8,6 +8,10 @@ metadata:
     app: mosquitto
 spec:
   ports:
+    - port: 1883
+      targetPort: 1883
+      protocol: TCP
+      name: mqtt
     - port: 8883
       targetPort: 8883
       protocol: TCP
