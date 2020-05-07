@@ -8,7 +8,7 @@ spec:
   capacity:
     storage: 30Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
