@@ -1,5 +1,7 @@
 ---
 home-assistant:
+  image:
+    tag: 0.109.5
   ingress:
     enabled: true
     annotations:
