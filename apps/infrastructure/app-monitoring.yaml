@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: monitoring
   namespace: argocd
 spec:
   destination:
     namespace: monitoring
     server: 'https://kubernetes.default.svc'
   source:
-    path: apps/infrastructure/prometheus
-    repoURL: 'git@github.com:LukeChannings/kube-config.git'
+    path: apps/infrastructure/monitoring
+    repoURL: 'git@github.com:LukeChannings/k8s-at-home.git'
     targetRevision: HEAD
   project: infrastructure
