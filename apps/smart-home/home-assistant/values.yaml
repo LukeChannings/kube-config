@@ -32,7 +32,6 @@ postgresql:
   global:
     postgresql:
       existingSecret: postgres-postgresql
-      postgresqlUsername: home-assistant
       postgresqlDatabase: home-assistant
   persistence:
     enabled: true
