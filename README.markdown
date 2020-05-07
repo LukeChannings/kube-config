@@ -1,4 +1,4 @@
-# Luke's k8s config
+# Luke's kube config
 
 ![Lint Status](https://github.com/LukeChannings/k8s-at-home/workflows/Lint/badge.svg)
 
