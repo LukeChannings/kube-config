@@ -22,11 +22,6 @@ home-assistant:
     user:
       name: "Luke Channings"
       email: "luke+k8s-hass-sync@channings.me"
-  persistence:
-    storageClass: local-storage
-    subPath: 'config'
-    accessModes:
-      - ReadWriteMany
   monitoring:
     enabled: true
     serviceMonitor:
@@ -42,7 +37,6 @@ postgresql:
     accessModes:
       - ReadWriteMany
     size: 30Gi
-    subPath: 'postgres'
   metrics:
     enabled: true
     serviceMonitor:
