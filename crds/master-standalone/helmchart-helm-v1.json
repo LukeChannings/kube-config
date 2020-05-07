@@ -1,0 +1,60 @@
+{
+  "apiVersion": "apiextensions.k8s.io/v1",
+  "kind": "CustomResourceDefinition",
+  "metadata": {
+    "creationTimestamp": "2020-05-02T13:18:18Z",
+    "generation": 1,
+    "name": "helmcharts.helm.cattle.io",
+    "resourceVersion": "156",
+    "selfLink": "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/helmcharts.helm.cattle.io",
+    "uid": "86f9466f-248d-43f9-b33a-223add57c45d"
+  },
+  "spec": {
+    "conversion": {
+      "strategy": "None"
+    },
+    "group": "helm.cattle.io",
+    "names": {
+      "kind": "HelmChart",
+      "listKind": "HelmChartList",
+      "plural": "helmcharts",
+      "singular": "helmchart"
+    },
+    "preserveUnknownFields": true,
+    "scope": "Namespaced",
+    "versions": [
+      {
+        "name": "v1",
+        "served": true,
+        "storage": true
+      }
+    ]
+  },
+  "status": {
+    "acceptedNames": {
+      "kind": "HelmChart",
+      "listKind": "HelmChartList",
+      "plural": "helmcharts",
+      "singular": "helmchart"
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2020-05-02T13:18:18Z",
+        "message": "no conflicts found",
+        "reason": "NoConflicts",
+        "status": "True",
+        "type": "NamesAccepted"
+      },
+      {
+        "lastTransitionTime": "2020-05-02T13:18:18Z",
+        "message": "the initial names have been accepted",
+        "reason": "InitialNamesAccepted",
+        "status": "True",
+        "type": "Established"
+      }
+    ],
+    "storedVersions": [
+      "v1"
+    ]
+  }
+}
