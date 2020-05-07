@@ -29,10 +29,7 @@ home-assistant:
 postgresql:
   rbac:
     create: true
-  global:
-    postgresql:
-      existingSecret: postgres-postgresql
-      postgresqlDatabase: home-assistant
+  postgresqlDatabase: home-assistant
   persistence:
     enabled: true
     storageClass: "local-storage"
