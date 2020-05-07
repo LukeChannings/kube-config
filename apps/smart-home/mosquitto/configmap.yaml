@@ -10,7 +10,7 @@ data:
     # https://github.com/eclipse/mosquitto/blob/master/mosquitto.conf
     bind_address 0.0.0.0
     port 1883
-    listen 8883
+    listener 8883
     capath /etc/tls/certs
     certfile /tls/tls.crt
     keyfile /tls/tls.key
