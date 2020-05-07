@@ -19,6 +19,8 @@ home-assistant:
   hostNetwork: true
   extraSecretForEnvFrom:
     - home-assistant-secrets
+  persistence:
+    existingClaim: home-assistant-config
   git:
     enabled: true
     repo: git@github.com:LukeChannings/home-assistant-config.git
