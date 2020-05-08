@@ -1,8 +1,7 @@
 ---
 kubernetes-ingress:
   controller:
-    kind: Deployment
-    replicaCount: 2
+    kind: DaemonSet
     ingressClass: internal
     defaultTLSSecret:
       enabled: true
@@ -13,8 +12,6 @@ kubernetes-ingress:
         app: haproxy-ingress
     publishService:
       enabled: true
-    image:
-      tag: 1.4.4
     nodeSelector:
       kubernetes.io/arch: amd64
   defaultBackend:
