@@ -40,7 +40,7 @@ home-assistant:
     - name: home-assistant-secrets
       mountPath: /config/secrets.yaml
 postgresql:
-  existingSecret: home-assistant-postgresql
+  # existingSecret: home-assistant-postgresql
 
   image:
     registry: docker.io
