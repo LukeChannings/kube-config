@@ -73,14 +73,14 @@ prometheus-operator:
       create: true
       pspEnabled: true
       pspAnnotations: {}
-        ## Specify pod annotations
-        ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
-        ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
-        ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
-        ##
-        # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
-        # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
-        # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
+      ## Specify pod annotations
+      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
+      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
+      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
+      ##
+      # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+      # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
+      # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
 
     ## Reference to one or more secrets to be used when pulling images
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -132,11 +132,11 @@ prometheus-operator:
         repeat_interval: 12h
         receiver: 'null'
         routes:
-        - match:
-            alertname: Watchdog
-          receiver: 'null'
+          - match:
+              alertname: Watchdog
+            receiver: 'null'
       receivers:
-      - name: 'null'
+        - name: 'null'
 
     ## Pass the Alertmanager configuration directives through Helm's templating
     ## engine. If the Alertmanager configuration contains Alertmanager templates,
@@ -1737,12 +1737,12 @@ prometheus-operator:
       storageSpec:
       volumeClaimTemplate:
         spec:
-            volumeName: prometheus
-            storageClassName: local-storage
-            accessModes: ["ReadWriteMany"]
-            resources:
-              requests:
-                storage: 150Gi
+          volumeName: prometheus
+          storageClassName: local-storage
+          accessModes: ["ReadWriteMany"]
+          resources:
+            requests:
+              storage: 150Gi
       #    selector: {}
 
       ## AdditionalScrapeConfigs allows specifying additional Prometheus scrape configurations. Scrape configurations
