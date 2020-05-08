@@ -106,11 +106,9 @@ postgresql:
   persistence:
     enabled: true
     mountPath: /bitnami/postgresql
-
-
     storageClass: "local-storage"
     accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany
     size: 30Gi
     annotations: {}
 
