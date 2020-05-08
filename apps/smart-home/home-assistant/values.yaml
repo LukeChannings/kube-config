@@ -40,10 +40,6 @@ home-assistant:
     - name: home-assistant-secrets
       mountPath: /config/secrets.yaml
 postgresql:
-  global:
-    postgresql:
-      existingSecret: postgres-postgresql
-
   image:
     registry: docker.io
     repository: bitnami/postgresql
