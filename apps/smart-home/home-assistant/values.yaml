@@ -32,6 +32,12 @@ home-assistant:
     enabled: true
     serviceMonitor:
       enabled: true
+  extraVolumes:
+    - name: home-assistant-secrets
+      secret: home-assistant-secrets
+  extraVolumeMounts:
+    - name: home-assistant-secrets
+      mountPath: /config/secrets.yaml
 postgresql:
   global:
     postgresql:
