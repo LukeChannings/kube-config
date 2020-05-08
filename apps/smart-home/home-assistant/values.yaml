@@ -34,7 +34,8 @@ home-assistant:
       enabled: true
   extraVolumes:
     - name: home-assistant-secrets
-      secret: home-assistant-secrets
+      secret:
+        name: home-assistant-secrets
   extraVolumeMounts:
     - name: home-assistant-secrets
       mountPath: /config/secrets.yaml
