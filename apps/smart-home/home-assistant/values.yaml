@@ -33,21 +33,188 @@ home-assistant:
     serviceMonitor:
       enabled: true
 postgresql:
-  rbac:
-    create: true
-  postgresqlDatabase: home-assistant
-  existingSecret: postgres-postgresql
-  persistence:
-    enabled: true
-    storageClass: "local-storage"
-    accessModes:
-      - ReadWriteMany
-    size: 30Gi
-  metrics:
-    enabled: true
-    serviceMonitor:
-      enabled: true
+  global:
+    postgresql:
+      existingSecret: postgres-postgresql
+
+  image:
+    registry: docker.io
+    repository: bitnami/postgresql
+    tag: 11.7.0-debian-10-r99
+    pullPolicy: IfNotPresent
+    debug: true
+
+  volumePermissions:
+    enabled: false
+    image:
+      registry: docker.io
+      repository: bitnami/minideb
+      tag: buster
+      pullPolicy: Always
+    securityContext:
+      runAsUser: 0
+
   securityContext:
     enabled: true
     fsGroup: 1000
     runAsUser: 1000
+
+  serviceAccount:
+    enabled: true
+
+  psp:
+    create: true
+
+  rbac:
+    create: true
+
+  replication:
+    enabled: false
+    user: repl_user
+    password: repl_password
+    slaveReplicas: 2
+    synchronousCommit: "on"
+    numSynchronousReplicas: 1
+    applicationName: my_application
+
+  postgresqlUsername: home-assistant
+  postgresqlDatabase: home-assistant
+  postgresqlDataDir: /bitnami/postgresql/data
+  extraEnv: []
+  ldap:
+    enabled: false
+    url: ""
+    server: ""
+    port: ""
+    prefix: ""
+    suffix: ""
+    baseDN: ""
+    bindDN: ""
+    bind_password:
+    search_attr: ""
+    search_filter: ""
+    scheme: ""
+    tls: false
+  service:
+    type: ClusterIP
+    port: 5432
+    annotations: {}
+  shmVolume:
+    enabled: true
+    chmod:
+      enabled: true
+  persistence:
+    enabled: true
+    mountPath: /bitnami/postgresql
+
+
+    storageClass: "local-storage"
+    accessModes:
+      - ReadWriteOnce
+    size: 30Gi
+    annotations: {}
+
+  updateStrategy:
+    type: RollingUpdate
+
+  master:
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    labels: {}
+    annotations: {}
+    podLabels: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    extraVolumeMounts: []
+    extraVolumes: []
+    sidecars: []
+
+    service: {}
+
+  slave:
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    labels: {}
+    annotations: {}
+    podLabels: {}
+    podAnnotations: {}
+    priorityClassName: ""
+    extraInitContainers: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    sidecars: []
+
+    service: {}
+
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
+
+  commonAnnotiations: {}
+
+  networkPolicy:
+    enabled: false
+
+    allowExternal: true
+
+    explicitNamespacesSelector: {}
+
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+
+  metrics:
+    enabled: true
+    service:
+      type: ClusterIP
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9187"
+      loadBalancerIP:
+    serviceMonitor:
+      enabled: true
+      additionalLabels: {}
+    prometheusRule:
+      enabled: true
+      additionalLabels: {}
+      namespace: ""
+      rules: []
+
+    image:
+      registry: docker.io
+      repository: bitnami/postgres-exporter
+      tag: 0.8.0-debian-10-r106
+      pullPolicy: IfNotPresent
+    securityContext:
+      enabled: false
+      runAsUser: 1000
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 6
+      successThreshold: 1
+
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 6
+      successThreshold: 1
