@@ -105,12 +105,7 @@ postgresql:
       enabled: true
   persistence:
     enabled: true
-    mountPath: /bitnami/postgresql
-    storageClass: "local-storage"
-    accessModes:
-      - ReadWriteMany
-    size: 30Gi
-    annotations: {}
+    existingClaim: home-assistant-postgres
 
   updateStrategy:
     type: RollingUpdate
