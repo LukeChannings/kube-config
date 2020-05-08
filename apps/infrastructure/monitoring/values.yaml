@@ -5,11 +5,6 @@ prometheus-operator:
     enabled: false
   kubeProxy:
     enabled: false
-  prometheusOperator:
-    tlsProxy:
-      enabled: false
-    admissionWebhooks:
-      enabled: false
   prometheus:
     enabled: true
     prometheusSpec:
