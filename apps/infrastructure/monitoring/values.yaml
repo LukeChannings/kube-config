@@ -466,6 +466,8 @@ prometheus-operator:
     defaultDashboardsEnabled: false
 
     adminPassword: prom-operator
+    admin:
+      existingSecret: prometheus-grafana
 
     ingress:
       ## If true, Grafana Ingress will be created
