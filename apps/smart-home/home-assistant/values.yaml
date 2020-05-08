@@ -36,6 +36,7 @@ postgresql:
   rbac:
     create: true
   postgresqlDatabase: home-assistant
+  existingSecret: postgres-postgresql
   persistence:
     enabled: true
     storageClass: "local-storage"
