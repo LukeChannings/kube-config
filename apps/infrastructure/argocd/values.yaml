@@ -1,8 +1,5 @@
 ---
 installCRDs: false
-global:
-  image:
-    tag: v1.5.4
 controller:
   metrics:
     enabled: true
@@ -13,6 +10,8 @@ server:
     enabled: true
     serviceMonitor:
       enabled: true
+  service:
+    type: NodePort
   ingress:
     enabled: true
     annotations:
