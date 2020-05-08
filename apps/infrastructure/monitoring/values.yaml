@@ -1737,14 +1737,14 @@ prometheus-operator:
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
       ##
       storageSpec:
-      volumeClaimTemplate:
-        spec:
-          volumeName: prometheus
-          storageClassName: local-storage
-          accessModes: ["ReadWriteMany"]
-          resources:
-            requests:
-              storage: 150Gi
+        volumeClaimTemplate:
+          spec:
+            volumeName: prometheus
+            storageClassName: local-storage
+            accessModes: ["ReadWriteMany"]
+            resources:
+              requests:
+                storage: 150Gi
       #    selector: {}
 
       ## AdditionalScrapeConfigs allows specifying additional Prometheus scrape configurations. Scrape configurations
