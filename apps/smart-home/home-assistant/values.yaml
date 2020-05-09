@@ -32,10 +32,3 @@ home-assistant:
     enabled: true
     serviceMonitor:
       enabled: true
-  extraVolumes:
-    - name: home-assistant-secrets
-      secret:
-        secretName: home-assistant-secrets
-  extraVolumeMounts:
-    - name: home-assistant-secrets
-      mountPath: /config/secrets.yaml
