@@ -6,7 +6,7 @@ home-assistant:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-production
-      ingress.class: internal
+      kubernetes.io/ingress.class: internal
     path: /
     hosts:
       - home-assistant.private.channings.me

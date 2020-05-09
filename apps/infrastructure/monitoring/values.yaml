@@ -67,7 +67,7 @@ prometheus-operator:
     ingress:
       enabled: true
       annotations:
-        ingress.class: internal
+        kubernetes.io/ingress.class: internal
         cert-manager.io/cluster-issuer: letsencrypt-production
       tls:
         - hosts:
@@ -152,7 +152,7 @@ prometheus-operator:
     ingress:
       enabled: true
       annotations:
-        ingress.class: internal
+        kubernetes.io/ingress.class: internal
         cert-manager.io/cluster-issuer: letsencrypt-production
       labels: {}
       hosts:
@@ -421,7 +421,7 @@ prometheus-operator:
     ingress:
       enabled: true
       annotations:
-        ingress.class: internal
+        kubernetes.io/ingress.class: internal
         cert-manager.io/cluster-issuer: letsencrypt-production
       labels: {}
       hosts:
