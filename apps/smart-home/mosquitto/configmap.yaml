@@ -13,7 +13,6 @@ data:
     acl_file /mosquitto/config/acl
     persistence true
     persistence_location /data/
-    log_type information
 
     # MQTT
     port 1883
@@ -24,8 +23,6 @@ data:
     capath /etc/tls/certs
     certfile /tls/tls.crt
     keyfile /tls/tls.key
-    tls_version tlsv1.2
-    # End of MQTT over TLS/SLL configuration
 
     # WebSockets over TLS
     listener 9883 0.0.0.0
