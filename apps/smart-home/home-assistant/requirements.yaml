@@ -3,6 +3,3 @@ dependencies:
   - name: home-assistant
     version: 0.13.2
     repository: https://kubernetes-charts.storage.googleapis.com/
-  - name: postgresql
-    version: 8.9.6
-    repository: https://charts.bitnami.com/bitnami/
