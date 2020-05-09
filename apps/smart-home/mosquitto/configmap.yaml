@@ -17,16 +17,11 @@ data:
     # MQTT
     port 1883
     bind_address 0.0.0.0
+    protocol mqtt
 
     # MQTTS
-    listener 8883 0.0.0.0
-    capath /etc/ssl/certs
-    certfile /tls/tls.crt
-    keyfile /tls/tls.key
-
-    # WebSockets over TLS
-    listener 9883 0.0.0.0
-    protocol websockets
+    listener 8883
+    protocol mqtt
     capath /etc/ssl/certs
     certfile /tls/tls.crt
     keyfile /tls/tls.key
