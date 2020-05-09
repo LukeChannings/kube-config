@@ -1,0 +1,22 @@
+{
+  "name": "compare-helm-versions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "compare-helm-versions": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "glob": "^7.1.6",
+    "yaml": "^1.9.2"
+  },
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}

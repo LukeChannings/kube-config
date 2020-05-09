@@ -1,6 +1,0 @@
----
-dependencies:
-  # https://github.com/haproxytech/helm-charts/tree/master/kubernetes-ingress
-  - name: kubernetes-ingress
-    version: 1.2.0
-    repository: https://haproxytech.github.io/helm-charts
