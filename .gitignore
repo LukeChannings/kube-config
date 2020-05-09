@@ -2,3 +2,4 @@ secrets
 .DS_Store
 secret-*.yaml
 charts
+node_modules
