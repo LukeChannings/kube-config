@@ -31,6 +31,8 @@ spec:
           ports:
             - containerPort: 8883
               name: mqtts
+            - containerPort: 1883
+              name: mqtt
           readinessProbe:
             tcpSocket:
               port: 8883
