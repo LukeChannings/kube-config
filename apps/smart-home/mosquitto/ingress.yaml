@@ -21,3 +21,7 @@ spec:
             backend:
               serviceName: mosquitto
               servicePort: mqtts
+          - path: /ws
+            backend:
+              serviceName: mosquitto
+              servicePort: wsmqtts

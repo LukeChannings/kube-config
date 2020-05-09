@@ -16,5 +16,9 @@ spec:
       targetPort: 8883
       protocol: TCP
       name: mqtts
+    - port: 9883
+      targetPort: 9883
+      protocol: TCP
+      name: wsmqtts
   selector:
     name: mosquitto

@@ -33,6 +33,8 @@ spec:
               name: mqtts
             - containerPort: 1883
               name: mqtt
+            - containerPort: 9883
+              name: wsmqtts
           readinessProbe:
             tcpSocket:
               port: 8883
