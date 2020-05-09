@@ -50,4 +50,4 @@ spec:
             claimName: home-assistant-postgres
         - name: password-secret
           secret:
-            secretName: postgres-password
+            secretName: home-assistant-postgresql
