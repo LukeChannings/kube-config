@@ -17,3 +17,8 @@ yamllint -c .yamllint.yaml .
 shellcheck -s bash ./**/*.sh
 
 kubeval -i '(Chart|values.*|requirements|.*\.crds?)\.yaml$' -d ./apps --additional-schema-locations file://./crds
+
+
+while IFS= read -d '' -r file; do
+  helm lint --with-subcharts "$(dirname "$file")"
+done < <(find . -name 'Chart.yaml' -print0)

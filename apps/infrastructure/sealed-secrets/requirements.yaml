@@ -1,7 +1,0 @@
----
-dependencies:
-  - name: sealed-secrets
-    version: 1.8.0
-    repository: https://kubernetes-charts.storage.googleapis.com/
-metadata:
-  name: requirements
