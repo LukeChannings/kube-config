@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+version: 1.0.0
+name: node-red
+dependencies:
+  - name: node-red
+    version: 1.4.2
+    repository: https://kubernetes-charts.storage.googleapis.com/
