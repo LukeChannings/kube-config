@@ -1,0 +1,6 @@
+dependencies:
+- name: node-red
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 1.4.2
+digest: sha256:4573c84ebcf71cb0d4f5971cfe66d33b8a4fdb5c540e4aa257da14dd13a4c03f
+generated: "2020-05-09T23:51:18.288003+01:00"

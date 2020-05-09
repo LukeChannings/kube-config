@@ -29,10 +29,10 @@ node-red:
     path: /
     hosts:
       - node-red.private.channings.me
-    tls: []
-     - secretName: node-red-tls
-       hosts:
-         - node-red.private.channings.me
+    tls:
+      - secretName: node-red-tls
+        hosts:
+          - node-red.private.channings.me
 
   persistence:
     enabled: true
@@ -55,11 +55,11 @@ node-red:
 
   resources:
     limits:
-     cpu: 100m
-     memory: 128Mi
+      cpu: 100m
+      memory: 128Mi
     requests:
-     cpu: 100m
-     memory: 128Mi
+      cpu: 100m
+      memory: 128Mi
 
   nodeSelector:
     kubernetes.io/hostname: sentinel
