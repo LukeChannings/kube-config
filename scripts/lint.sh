@@ -20,5 +20,6 @@ kubeval -i '(Chart|values.*|requirements|.*\.crds?)\.yaml$' -d ./apps --addition
 
 
 while IFS= read -d '' -r file; do
+  helm dependencies build "$(dirname "$file")"
   helm lint --with-subcharts "$(dirname "$file")"
 done < <(find . -name 'Chart.yaml' -print0)
