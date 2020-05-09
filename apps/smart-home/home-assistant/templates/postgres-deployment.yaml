@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres
+  template:
+    metadata:
+      labels:
+        name: postgres
+      namespace: home-assistant
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12.2-alpine
+          ports:
+            - containerPort: 5432
+              name: postgres
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          env:
+            - name: POSTGRES_DB
+              value: home-assistant
+            - name: POSTGRES_USER
+              value: home-assistant
+            - name: POSTGRES_PASSWORD_FILE
+              value: /run/secret/postgresql-password
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-db
+            - mountPath: /run/secret
+              name: password-secret
+      restartPolicy: Always
+      volumes:
+        - name: postgres-db
+          persistentVolumeClaim:
+            claimName: home-assistant-postgres
+        - name: password-secret
+          secret:
+            secretName: home-assistant-postgresql

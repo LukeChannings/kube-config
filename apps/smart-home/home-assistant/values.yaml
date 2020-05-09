@@ -1,5 +1,7 @@
 ---
 home-assistant:
+  image:
+    tag: 0.109.5
   ingress:
     enabled: true
     annotations:
@@ -8,8 +10,25 @@ home-assistant:
     path: /
     hosts:
       - home-assistant.private.channings.me
+      - home-assistant.channings.me
     tls:
       - secretName: home-assistant-tls
         hosts:
           - home-assistant.private.channings.me
+          - home-assistant.channings.me
   hostNetwork: true
+  extraSecretForEnvFrom:
+    - home-assistant-secrets
+  persistence:
+    existingClaim: home-assistant-config
+  git:
+    enabled: true
+    repo: git@github.com:LukeChannings/home-assistant-config.git
+    secret: github-deploy-key
+    user:
+      name: "Luke Channings"
+      email: "luke+k8s-hass-sync@channings.me"
+  monitoring:
+    enabled: true
+    serviceMonitor:
+      enabled: true
