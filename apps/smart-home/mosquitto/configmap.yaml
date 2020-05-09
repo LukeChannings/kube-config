@@ -20,14 +20,14 @@ data:
 
     # MQTTS
     listener 8883 0.0.0.0
-    capath /etc/tls/certs
+    capath /etc/ssl/certs
     certfile /tls/tls.crt
     keyfile /tls/tls.key
 
     # WebSockets over TLS
     listener 9883 0.0.0.0
     protocol websockets
-    capath /etc/tls/certs
+    capath /etc/ssl/certs
     certfile /tls/tls.crt
     keyfile /tls/tls.key
   acl: |-
