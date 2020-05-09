@@ -1,19 +1,15 @@
 ---
 kubernetes-ingress:
   controller:
-    kind: DaemonSet
     ingressClass: internal
     defaultTLSSecret:
       enabled: true
       secret: haproxy-ingress/haproxy-default-tls
     service:
-      type: NodePort
-      labels:
-        app: haproxy-ingress
+      type: LoadBalancer
+      loadBalancerIP: "192.168.1.200"
     publishService:
       enabled: true
-    image:
-      tag: 1.4.4
     nodeSelector:
       kubernetes.io/arch: amd64
   defaultBackend:
