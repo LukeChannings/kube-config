@@ -8,17 +8,31 @@ data:
   mosquitto.conf: |
     # https://mosquitto.org/man/mosquitto-conf-5.html
     # https://github.com/eclipse/mosquitto/blob/master/mosquitto.conf
-    bind_address 0.0.0.0
-    port 1883
-    listener 8883
-    capath /etc/tls/certs
-    certfile /tls/tls.crt
-    keyfile /tls/tls.key
     allow_anonymous false
     password_file /secret/password
     acl_file /mosquitto/config/acl
     persistence true
     persistence_location /data/
+    log_type information
+
+    # MQTT
+    port 1883
+    bind_address 0.0.0.0
+
+    # MQTTS
+    listener 8883 0.0.0.0
+    capath /etc/tls/certs
+    certfile /tls/tls.crt
+    keyfile /tls/tls.key
+    tls_version tlsv1.2
+    # End of MQTT over TLS/SLL configuration
+
+    # WebSockets over TLS
+    listener 9883 0.0.0.0
+    protocol websockets
+    capath /etc/tls/certs
+    certfile /tls/tls.crt
+    keyfile /tls/tls.key
   acl: |-
     user luke
     topic readwrite #
