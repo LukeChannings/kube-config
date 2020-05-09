@@ -18,9 +18,9 @@ shellcheck -s bash ./**/*.sh
 
 kubeval -i '(Chart|values.*|requirements|.*\.crds?)\.yaml$' -d ./apps --additional-schema-locations file://./crds
 
-# helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-# helm repo add haproxytech https://haproxytech.github.io/helm-charts/
-# helm repo add jetstack https://charts.jetstack.io/
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add haproxytech https://haproxytech.github.io/helm-charts/
+helm repo add jetstack https://charts.jetstack.io/
 
 while IFS= read -d '' -r file; do
   helm dependencies update "$(dirname "$file")" || true
