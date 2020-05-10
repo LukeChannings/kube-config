@@ -12,7 +12,7 @@ data:
     password_file /secret/password
     acl_file /mosquitto/config/acl
     persistence true
-    persistence_location /data/
+    persistence_location /mosquitto/data/
 
     # MQTT
     port 1883
