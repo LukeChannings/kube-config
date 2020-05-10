@@ -11,7 +11,7 @@ spec:
   source:
     path: apps/smart-home
     repoURL: 'git@github.com:LukeChannings/kube-config.git'
-    targetRevision: node-red
+    targetRevision: HEAD
   project: default
   syncPolicy:
     automated:
