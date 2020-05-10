@@ -23,6 +23,18 @@ spec:
         - name: node-red
           image: nodered/node-red:1.0.6-12
           imagePullPolicy: IfNotPresent
+          readinessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 30
           ports:
             - name: http
               containerPort: 1880
