@@ -1,4 +1,4 @@
-# Luke's kube config
+# Luke's kubeconfig
 
 ![Lint Status](https://github.com/LukeChannings/kube-config/workflows/Lint/badge.svg?branch=master)
 
