@@ -72,7 +72,7 @@ spec:
             claimName: node-red-data
         - name: settings
           configMap:
-              name: node-red-settings
+            name: node-red-settings
       nodeSelector:
         kubernetes.io/hostname: sentinel
       securityContext:
