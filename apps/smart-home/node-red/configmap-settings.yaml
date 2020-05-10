@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-red-settings
+  namespace: node-red
+  labels:
+    app: node-red
+data:
+  settings.js: |
+    module.exports = {
+        uiPort: process.env.PORT || 1880,
+        mqttReconnectTime: 15000,
+        serialReconnectTime: 15000,
+        debugMaxLength: 1000,
+        flowFilePretty: true,
+        credentialSecret: process.env.NODE_RED_CREDENTIAL_SECRET,
+        adminAuth: {
+            type: "credentials",
+            users: [{
+                username: process.env.NODE_RED_USERNAME,
+                password: process.env.NODE_RED_PASSWORD,
+                permissions: "*"
+            }]
+        },
+        functionGlobalContext: {},
+        exportGlobalContextKeys: true,
+        logging: {
+            console: {
+                level: "info",
+                metrics: false,
+                audit: false
+            }
+        },
+        editorTheme: {
+            projects: {
+                enabled: true
+            }
+        }
+    }
