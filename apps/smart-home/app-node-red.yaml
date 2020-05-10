@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: node-red
+  namespace: node-red
+spec:
+  destination:
+    namespace: node-red
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/smart-home/node-red
+    repoURL: 'git@github.com:LukeChannings/kube-config.git'
+    targetRevision: HEAD
+  project: smart-home

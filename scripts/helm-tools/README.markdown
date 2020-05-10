@@ -1,4 +1,12 @@
-# Compare Helm Versions
+# Helm Tools
+
+## Installation
+
+`npm i && npm link`
+
+## compare-helm-versions
+
+Make sure you're in the kube-config project root and run `compare-helm-versions`.
 
 This project has many helm dependencies and it's difficulat to keep track of their versions.
 This script outputs the current and latest versions of all dependencies.
@@ -15,8 +23,7 @@ This script outputs the current and latest versions of all dependencies.
 | home-assistant      |  home-assistant       |  0.13.2           |  0.13.2         |
 ```
 
-## Installation
+## eject-chart
 
-`npm i && npm link`
-
-Make sure you're in the kube-config project root and run `compare-helm-versions`.
+Go to a folder with a Chart.yaml, run `eject-chart` and it will output the templated chart to `./helm-manifests`.
+It's useful if a chart isn't great and doesn't allow everything you need, you can bail out and just do it yourself.

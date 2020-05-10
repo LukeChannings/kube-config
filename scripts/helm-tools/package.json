@@ -1,13 +1,13 @@
 {
   "name": "compare-helm-versions",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CLI tools for Helm",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "compare-helm-versions": "./index.js"
+    "compare-helm-versions": "./compare-helm-versions.js",
+    "eject-chart": "./eject-chart.js"
   },
   "keywords": [],
   "author": "",
