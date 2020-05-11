@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - unifi-controller.private.channings.me
+        - unifi.private.channings.me
       secretName: mosquitto-tls
   rules:
-    - host: unifi-controller.private.channings.me
+    - host: unifi.private.channings.me
       http:
         paths:
           - path: /
