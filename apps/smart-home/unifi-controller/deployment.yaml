@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+  namespace: unifi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: controller
+  template:
+    metadata:
+      labels:
+        name: controller
+      namespace: unifi
+    spec:
+      containers:
+        - name: controller
+          image: linuxserver/unifi-controller
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "2Gi"
+            requests:
+              cpu: "100m"
+              memory: "1.5Gi"
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          ports:
+            - containerPort: 8443
+              name: https
+            - containerPort: 3478
+            - containerPort: 10001
+            - containerPort: 8080
+              name: inform
+            - containerPort: 8081
+            - containerPort: 8843
+            - containerPort: 8880
+            - containerPort: 6789
+            - containerPort: 5000
+          volumeMounts:
+            - mountPath: /config/data
+              name: data
+      restartPolicy: Always
+      nodeSelector:
+        kubernetes.io/hostname: suplex
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: unifi-config

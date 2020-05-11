@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: controller-ui
+  namespace: unifi
+spec:
+  selector:
+    name: controller
+  type: NodePort
+  ports:
+    - targetPort: https
+      port: 443
+      name: https

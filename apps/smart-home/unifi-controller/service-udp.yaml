@@ -1,0 +1,22 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: controller-udp
+  namespace: unifi
+  annotations:
+    metallb.universe.tf/allow-shared-ip: 192.168.1.210
+spec:
+  selector:
+    name: controller
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.210
+  ports:
+    - targetPort: 3478
+      port: 3478
+      protocol: "UDP"
+      name: "unifi-3478"
+    - targetPort: 10001
+      port: 10001
+      protocol: "UDP"
+      name: "unifi-10001"

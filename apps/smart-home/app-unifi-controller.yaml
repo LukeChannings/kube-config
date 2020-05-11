@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: unifi-controller
+  namespace: argocd
+spec:
+  destination:
+    namespace: unifi-controller
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/smart-home/unifi-controller
+    repoURL: 'git@github.com:LukeChannings/kube-config.git'
+    targetRevision: HEAD
+  project: smart-home

@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: unifi-controller
+  namespace: unifi
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    kubernetes.io/ingress.class: internal
+    haproxy.org/server-ssl: "true"
+spec:
+  tls:
+    - hosts:
+        - unifi-controller.private.channings.me
+      secretName: mosquitto-tls
+  rules:
+    - host: unifi-controller.private.channings.me
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: controller-ui
+              servicePort: https
