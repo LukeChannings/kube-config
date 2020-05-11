@@ -19,6 +19,7 @@ jobs:
           curl -OL https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
           tar xf kubeval-linux-amd64.tar.gz
           sudo cp kubeval /usr/local/bin
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
       - name: Lint
         run: |
           chmod +x "$GITHUB_WORKSPACE/scripts/lint.sh"

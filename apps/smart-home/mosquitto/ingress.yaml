@@ -6,7 +6,7 @@ metadata:
   namespace: mosquitto
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    ingress.class: internal
+    kubernetes.io/ingress.class: internal
     haproxy.org/ssl-passthrough: "true"
 spec:
   tls:

@@ -1,0 +1,91 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-red
+  namespace: node-red
+  labels:
+    app.kubernetes.io/name: node-red
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: node-red
+  template:
+    metadata:
+      namespace: node-red
+      labels:
+        app.kubernetes.io/name: node-red
+    spec:
+      containers:
+        - name: node-red
+          image: nodered/node-red:1.0.6-12
+          imagePullPolicy: IfNotPresent
+          readinessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 30
+          ports:
+            - name: http
+              containerPort: 1880
+              protocol: TCP
+          env:
+            - name: FLOWS
+              value: flows.json
+            - name: NODE_RED_ENABLE_SAFE_MODE
+              value: "false"
+            - name: NODE_RED_ENABLE_PROJECTS
+              value: "true"
+            - name: NODE_OPTIONS
+              value: ""
+            - name: TZ
+              value: Europe/London
+            - name: NODE_RED_CREDENTIAL_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: node-red
+                  key: NODE_RED_CREDENTIAL_SECRET
+            - name: NODE_RED_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: node-red
+                  key: NODE_RED_USERNAME
+            - name: NODE_RED_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: node-red
+                  key: NODE_RED_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: settings
+              mountPath: /data/settings.js
+              subPath: settings.js
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: node-red-data
+        - name: settings
+          configMap:
+            name: node-red-settings
+      nodeSelector:
+        kubernetes.io/hostname: sentinel
+      securityContext:
+        fsGroup: 1001

@@ -1,16 +1,30 @@
 ---
-kubernetes-ingress:
+internal:
   controller:
-    kind: Deployment
-    replicaCount: 1
     ingressClass: internal
     defaultTLSSecret:
       enabled: true
-      secret: haproxy-ingress/haproxy-default-tls
+      secret: haproxy-ingress/haproxy-internal-tls
     service:
-      type: NodePort
-      labels:
-        app: haproxy-ingress
+      type: LoadBalancer
+      loadBalancerIP: "192.168.1.200"
+    publishService:
+      enabled: true
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  defaultBackend:
+    replicaCount: 1
+    nodeSelector:
+      kubernetes.io/arch: amd64
+external:
+  controller:
+    ingressClass: external
+    defaultTLSSecret:
+      enabled: true
+      secret: haproxy-ingress/haproxy-external-tls
+    service:
+      type: LoadBalancer
+      loadBalancerIP: "192.168.1.250"
     publishService:
       enabled: true
     nodeSelector:

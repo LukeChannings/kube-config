@@ -1,3 +1,14 @@
 ---
+apiVersion: v2
+version: 1.0.0
 name: ingress-controller
-namespace: haproxy
+dependencies:
+  # https://github.com/haproxytech/helm-charts/tree/master/kubernetes-ingress
+  - name: kubernetes-ingress
+    version: 1.2.0
+    repository: https://haproxytech.github.io/helm-charts
+    alias: internal
+  - name: kubernetes-ingress
+    version: 1.2.0
+    repository: https://haproxytech.github.io/helm-charts
+    alias: external

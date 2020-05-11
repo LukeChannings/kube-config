@@ -1,6 +1,6 @@
-# Luke's k8s config
+# Luke's kubeconfig
 
-![Lint Status](https://github.com/LukeChannings/k8s-at-home/workflows/Lint/badge.svg)
+![Lint Status](https://github.com/LukeChannings/kube-config/workflows/Lint/badge.svg?branch=master)
 
 All of these scripts and configurations are specific to my home cluster. Do not expect any configurations to "just work" if you plan on using them.
 
@@ -76,8 +76,8 @@ For Ubuntu, download and `dpkg -i *.deb`: [https://kernel.ubuntu.com/~kernel-ppa
 
 ## Nodes
 
-| Hostname | Arch    | OS                      | CPU                      | RAM  | Storage                    |
-|----------|---------|-------------------------|--------------------------|------|----------------------------|
-| Suplex   | x86_64  | Arch Linux              | E3-1245 v3 @ 3.40GHz     | 32GB | 458GB SSD, 30TB Rust (ZFS) |
-| Snowkube | x86_64  | Ubuntu Server 20.04 LTS | i7-8700B CPU @ 3.20GHz   | 22GB | 200GB SSD                  |
-| Sentinel | aarch64 | Ubuntu Server 20.04 LTS | ARM Cortex-A72 @ 1.50GHz | 2GB  | 59GB MicroSD               |
+| Hostname | Arch    | OS                      | CPU                      | RAM  | Storage                             |
+|----------|---------|-------------------------|--------------------------|------|-------------------------------------|
+| Suplex   | x86_64  | Arch Linux              | E3-1245 v3 @ 3.40GHz     | 32GB | 458GB SSD, 30TB spinning rust (ZFS) |
+| Snowkube | x86_64  | Ubuntu Server 20.04 LTS | i7-8700B CPU @ 3.20GHz   | 22GB | 200GB SSD                           |
+| Sentinel | aarch64 | Ubuntu Server 20.04 LTS | ARM Cortex-A72 @ 1.50GHz | 2GB  | 59GB MicroSD                        |
