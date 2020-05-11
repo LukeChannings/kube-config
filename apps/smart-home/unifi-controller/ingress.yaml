@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
         - unifi.private.channings.me
-      secretName: mosquitto-tls
+      secretName: unifi-controller-tls
   rules:
     - host: unifi.private.channings.me
       http:
