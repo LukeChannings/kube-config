@@ -10,11 +10,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      name: controller
+      app: unifi-controller
   template:
     metadata:
       labels:
-        name: controller
+        app: unifi-controller
       namespace: unifi
     spec:
       containers:

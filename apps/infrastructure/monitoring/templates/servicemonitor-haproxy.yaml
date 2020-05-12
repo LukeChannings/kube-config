@@ -4,8 +4,6 @@ kind: ServiceMonitor
 metadata:
   name: monitor-haproxy
   namespace: haproxy-ingress
-  labels:
-    release: prometheus
 spec:
   endpoints:
     - interval: 3s
