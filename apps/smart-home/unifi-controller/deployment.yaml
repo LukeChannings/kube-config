@@ -36,8 +36,7 @@ spec:
             periodSeconds: 5
             failureThreshold: 30
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: https
             initialDelaySeconds: 10
             periodSeconds: 5
@@ -57,6 +56,15 @@ spec:
           volumeMounts:
             - mountPath: /config/data
               name: data
+        - name: metrics
+          image: golift/unifi-poller
+          resources:
+            limits:
+              cpu: "20m"
+              memory: "128Mi"
+            requests:
+              cpu: "20m"
+              memory: "128Mi"
       restartPolicy: Always
       volumes:
         - name: data
