@@ -1,0 +1,16 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: controller
+  namespace: unifi
+  labels:
+    release: prometheus
+spec:
+  endpoints:
+    - interval: 3s
+      path: /metrics
+      targetPort: metrics
+  selector:
+    matchLabels:
+      name: controller
