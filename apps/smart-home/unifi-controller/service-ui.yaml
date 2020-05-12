@@ -6,7 +6,7 @@ metadata:
   namespace: unifi
 spec:
   selector:
-    name: controller
+    app: unifi-controller
   type: NodePort
   ports:
     - targetPort: https
