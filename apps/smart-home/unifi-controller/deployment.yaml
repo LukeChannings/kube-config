@@ -58,6 +58,21 @@ spec:
               name: data
         - name: metrics
           image: golift/unifi-poller
+          env:
+            - name: UP_INFLUXDB_DISABLE
+              value: "true"
+            - name: UP_UNIFI_DEFAULT_URL
+              value: "controller.unifi.svc.cluster.local:443"
+            - name: UP_UNIFI_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: poller-auth
+                  key: POLLER_USER
+            - name: UP_UNIFI_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: poller-auth
+                  key: POLLER_PASS
           resources:
             limits:
               cpu: "20m"
