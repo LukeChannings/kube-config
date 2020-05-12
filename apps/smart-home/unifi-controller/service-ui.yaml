@@ -15,3 +15,18 @@ spec:
     - targetPort: metrics
       port: 9130
       name: metrics
+    - targetPort: inform
+      port: 8080
+      name: inform
+    - targetPort: 8081
+      port: 8081
+      name: unifi-8081
+    - targetPort: 8843
+      port: 8843
+      name: unifi-8843
+    - targetPort: 8880
+      port: 8880
+      name: unifi-8880
+    - targetPort: 6789
+      port: 6789
+      name: unifi-6789
