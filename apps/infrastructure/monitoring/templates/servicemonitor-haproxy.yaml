@@ -11,8 +11,8 @@ spec:
       targetPort: stat
   namespaceSelector:
     matchNames:
-    - haproxy-ingress
-    - monitoring
+      - haproxy-ingress
+      - monitoring
   selector:
     matchLabels:
       app.kubernetes.io/instance: haproxy-ingress
