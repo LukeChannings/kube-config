@@ -32,13 +32,13 @@ spec:
               value: "1000"
           readinessProbe:
             tcpSocket:
-              port: http
+              port: https
             periodSeconds: 5
             failureThreshold: 30
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: https
             initialDelaySeconds: 10
             periodSeconds: 5
             failureThreshold: 30
