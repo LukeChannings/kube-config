@@ -13,4 +13,4 @@ spec:
       targetPort: stat
   selector:
     matchLabels:
-      app: haproxy-ingress
+      app.kubernetes.io/instance: haproxy-ingress
