@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: poller-config
+  namespace: unifi
+data:
+  unifi-poller.conf: |
+    [poller]
+    debug = true
+
+    quiet = false
+
+    plugins = []
+
+    [prometheus]
+    disable = false
+    http_listen = "0.0.0.0:9130"
+    report_errors = true
+
+    [unifi]
+    dynamic = false
+
+    [unifi.defaults]
+    sites = ["all"]
+    save_ids = true
+    save_dpi = true
+    save_sites = true
