@@ -477,7 +477,7 @@ prometheus-operator:
       ruleNamespaceSelector: {}
       ruleSelectorNilUsesHelmValues: true
       ruleSelector: {}
-      serviceMonitorSelectorNilUsesHelmValues: true
+      serviceMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelector: {}
       serviceMonitorNamespaceSelector: {}
       podMonitorSelectorNilUsesHelmValues: true
