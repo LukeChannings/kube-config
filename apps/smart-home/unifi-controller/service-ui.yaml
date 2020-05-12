@@ -12,9 +12,9 @@ spec:
     - targetPort: https
       port: 443
       name: https
-    - targetPort: metrics
+    - targetPort: stat
       port: 9130
-      name: metrics
+      name: stat
     - targetPort: inform
       port: 8080
       name: inform
