@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: controller-ui
+  name: controller
   namespace: unifi
 spec:
   selector:

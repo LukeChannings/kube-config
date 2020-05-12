@@ -19,5 +19,5 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: controller-ui
+              serviceName: controller
               servicePort: https
