@@ -8,6 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     kubernetes.io/ingress.class: internal
     haproxy.org/server-ssl: "true"
+    haproxy.org/ssl-redirect: "true"
 spec:
   tls:
     - hosts:
