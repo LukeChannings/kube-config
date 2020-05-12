@@ -30,6 +30,18 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+          readinessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 30
           ports:
             - containerPort: 8443
               name: https
@@ -46,8 +58,6 @@ spec:
             - mountPath: /config/data
               name: data
       restartPolicy: Always
-      nodeSelector:
-        kubernetes.io/hostname: suplex
       volumes:
         - name: data
           persistentVolumeClaim:
