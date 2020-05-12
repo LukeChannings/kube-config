@@ -62,7 +62,7 @@ spec:
             - name: UP_INFLUXDB_DISABLE
               value: "true"
             - name: UP_UNIFI_DEFAULT_URL
-              value: "controller.unifi.svc.cluster.local:443"
+              value: "https://controller.unifi.svc.cluster.local"
             - name: UP_UNIFI_DEFAULT_USER
               valueFrom:
                 secretKeyRef:
