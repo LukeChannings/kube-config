@@ -12,3 +12,6 @@ spec:
     - targetPort: https
       port: 443
       name: https
+    - targetPort: metrics
+      port: 9130
+      name: metrics

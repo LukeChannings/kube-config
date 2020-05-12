@@ -6,6 +6,8 @@ metadata:
   namespace: unifi
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       name: controller
@@ -58,6 +60,9 @@ spec:
               name: data
         - name: metrics
           image: golift/unifi-poller
+          ports:
+            - containerPort: 9130
+              name: metrics
           env:
             - name: UP_INFLUXDB_DISABLE
               value: "true"
