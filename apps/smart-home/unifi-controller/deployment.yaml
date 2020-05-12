@@ -62,7 +62,7 @@ spec:
           image: golift/unifi-poller
           ports:
             - containerPort: 9130
-              name: metrics
+              name: stat
           env:
             - name: UP_INFLUXDB_DISABLE
               value: "true"

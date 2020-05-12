@@ -8,11 +8,11 @@ spec:
   endpoints:
     - interval: 3s
       path: /metrics
-      targetPort: metrics
+      targetPort: stat
   namespaceSelector:
     matchNames:
-    - unifi
-    - monitoring
+      - unifi
+      - monitoring
   selector:
     matchLabels:
       name: controller
