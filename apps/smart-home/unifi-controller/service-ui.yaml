@@ -4,6 +4,8 @@ apiVersion: v1
 metadata:
   name: controller
   namespace: unifi
+  labels:
+    app: unifi-controller
 spec:
   selector:
     app: unifi-controller
