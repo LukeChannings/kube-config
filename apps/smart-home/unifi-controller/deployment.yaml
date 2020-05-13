@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: linuxserver/unifi-controller
+          image: linuxserver/unifi-controller:5.12.66-ls57
           resources:
             limits:
               cpu: "150m"
@@ -59,7 +59,7 @@ spec:
             - mountPath: /config/data
               name: data
         - name: metrics
-          image: golift/unifi-poller
+          image: golift/unifi-poller:stable
           ports:
             - containerPort: 9130
               name: stat
