@@ -1,0 +1,99 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+  namespace: unifi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: unifi-controller
+  template:
+    metadata:
+      labels:
+        app: unifi-controller
+      namespace: unifi
+    spec:
+      containers:
+        - name: controller
+          image: linuxserver/unifi-controller
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "2Gi"
+            requests:
+              cpu: "100m"
+              memory: "1.5Gi"
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          readinessProbe:
+            tcpSocket:
+              port: https
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: https
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 30
+          ports:
+            - containerPort: 8443
+              name: https
+            - containerPort: 3478
+            - containerPort: 10001
+            - containerPort: 8080
+              name: inform
+            - containerPort: 8081
+            - containerPort: 8843
+            - containerPort: 8880
+            - containerPort: 6789
+            - containerPort: 5000
+          volumeMounts:
+            - mountPath: /config/data
+              name: data
+        - name: metrics
+          image: golift/unifi-poller
+          ports:
+            - containerPort: 9130
+              name: stat
+          env:
+            - name: UP_INFLUXDB_DISABLE
+              value: "true"
+            - name: UP_UNIFI_DEFAULT_URL
+              value: "https://controller.unifi.svc.cluster.local"
+            - name: UP_UNIFI_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: poller-auth
+                  key: POLLER_USER
+            - name: UP_UNIFI_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: poller-auth
+                  key: POLLER_PASS
+          volumeMounts:
+            - name: poller-config
+              mountPath: /config/unifi-poller.conf
+              subPath: unifi-poller.conf
+          resources:
+            limits:
+              cpu: "20m"
+              memory: "128Mi"
+            requests:
+              cpu: "20m"
+              memory: "128Mi"
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: unifi-config
+        - name: poller-config
+          configMap:
+            name: poller-config

@@ -2,17 +2,13 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: monitor-haproxy
-  namespace: haproxy-ingress
+  name: unifi-controller
+  namespace: unifi
 spec:
   endpoints:
     - interval: 3s
       path: /metrics
       targetPort: stat
-  namespaceSelector:
-    matchNames:
-      - haproxy-ingress
-      - monitoring
   selector:
     matchLabels:
-      app.kubernetes.io/instance: haproxy-ingress
+      app: unifi-controller
