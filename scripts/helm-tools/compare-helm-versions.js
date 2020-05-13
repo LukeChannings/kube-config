@@ -16,6 +16,8 @@ let results = [
   ['Chart Name', 'Chart Dependency', 'Current Version', 'Latest Version']
 ]
 
+spawnSync('helm', ['repo', 'update'])
+
 for (const chart of charts) {
   const chartYaml = fs.readFileSync(chart, { encoding: 'utf-8' })
   const chartParsed = yaml.parse(chartYaml)
@@ -24,7 +26,7 @@ for (const chart of charts) {
 
   if (Array.isArray(chartParsed.dependencies) && chartParsed.dependencies.length !== 0) {
     for (const dependency of chartParsed.dependencies) {
-      const helm = spawnSync('helm',  `show chart --repo ${dependency.repository} ${dependency.name}`.split(' '), { encoding: 'utf-8', maxBuffer: 1024 * 8192 })
+      const helm = spawnSync('helm', `show chart --repo ${dependency.repository} ${dependency.name}`.split(' '), { encoding: 'utf-8', maxBuffer: 1024 * 8192 })
       if (helm.status === 0) {
         const latestVersion = yaml.parse(helm.stdout).version
 

@@ -4,5 +4,5 @@ version: 1.0.0
 name: home-assistant
 dependencies:
   - name: home-assistant
-    version: 0.13.2
+    version: 0.13.3
     repository: https://kubernetes-charts.storage.googleapis.com/
