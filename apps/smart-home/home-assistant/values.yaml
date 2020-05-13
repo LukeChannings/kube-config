@@ -32,6 +32,6 @@ home-assistant:
     enabled: true
     serviceMonitor:
       enabled: true
-      # bearerTokenSecret:
-      #   key: hass-token
-      #   name: home-assistant-service-monitor
+      bearerTokenSecret:
+        key: hass-token
+        name: home-assistant-service-monitor

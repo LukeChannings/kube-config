@@ -1,6 +1,6 @@
 dependencies:
 - name: home-assistant
   repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 0.13.2
-digest: sha256:cfcc3f2b3a8a2b78112af19d933aaaa9d447f5dc9f6f9924f13faf9abb12d342
-generated: "2020-05-09T23:02:34.332798+01:00"
+  version: 0.13.3
+digest: sha256:7de123a57c586045ac0edf5f2534da776013fc3e9b4495e75684163e574fc72c
+generated: "2020-05-13T13:04:21.67501+01:00"
