@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: unifi-controller
+    namespace: unifi
     server: 'https://kubernetes.default.svc'
   source:
     path: apps/smart-home/unifi-controller

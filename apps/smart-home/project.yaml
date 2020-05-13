@@ -16,5 +16,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: node-red
       server: https://kubernetes.default.svc
+    - namespace: unifi
+      server: https://kubernetes.default.svc
   sourceRepos:
     - '*'
