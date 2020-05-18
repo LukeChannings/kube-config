@@ -322,6 +322,7 @@ prometheus-operator:
       metricRelabelings: []
       relabelings: []
   prometheus-node-exporter:
+    tag: v1.0.0-rc.1
     podLabels:
       jobLabel: node-exporter
     extraArgs:
