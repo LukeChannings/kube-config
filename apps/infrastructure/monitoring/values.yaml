@@ -145,8 +145,6 @@ prometheus-operator:
       portName: 'web'
   grafana:
     enabled: true
-    image:
-      tag: 7.0.0
     defaultDashboardsEnabled: true
     adminPassword: prom-operator
     admin:
