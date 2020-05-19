@@ -181,6 +181,31 @@ prometheus-operator:
       dashboards:
         enabled: true
         label: grafana_dashboard
+        default:
+          unifi-poller-client-dpi:
+            gnetId: 11310
+            revision: 3
+            datasource: Prometheus
+          unifi-poller-client-insights:
+            gnetId: 11315
+            revision: 7
+            datasource: Prometheus
+          unifi-poller-network-sites:
+            gnetId: 11311
+            revision: 4
+            datasource: Prometheus
+          unifi-poller-uap-insights:
+            gnetId: 11314
+            revision: 8
+            datasource: Prometheus
+          unifi-poller-usg-insights:
+            gnetId: 11313
+            revision: 7
+            datasource: Prometheus
+          unifi-poller-usw-insights:
+            gnetId: 11312
+            revision: 7
+            datasource: Prometheus
       datasources:
         enabled: true
         defaultDatasourceEnabled: true
