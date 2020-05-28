@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: linuxserver/unifi-controller:5.12.66-ls57
+          image: linuxserver/unifi-controller:5.12.72-ls59
           resources:
             limits:
               cpu: "150m"
@@ -84,11 +84,11 @@ spec:
               subPath: unifi-poller.conf
           resources:
             limits:
-              cpu: "20m"
-              memory: "128Mi"
+              cpu: "80m"
+              memory: "256Mi"
             requests:
-              cpu: "20m"
-              memory: "128Mi"
+              cpu: "80m"
+              memory: "256Mi"
       restartPolicy: Always
       volumes:
         - name: data
