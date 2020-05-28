@@ -6,7 +6,7 @@ metadata:
   namespace: unifi
 spec:
   endpoints:
-    - interval: 20s
+    - interval: 5s
       path: /metrics
       targetPort: stat
   selector:
