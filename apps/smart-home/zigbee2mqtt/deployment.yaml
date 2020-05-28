@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+  namespace: zigbee2mqtt
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        name: zigbee2mqtt
+      namespace: zigbee2mqtt
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - sentinel
+      containers:
+        - name: zigbee2mqtt
+          image: koenkk/zigbee2mqtt:1.13.1
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: Europe/London
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /app/data
+              name: nfs-config
+            - mountPath: /app/data/configuration.yaml
+              subPath: configuration.yaml
+              name: config
+              readOnly: true
+            - mountPath: /app/data/secret.yaml
+              subPath: secret.yaml
+              name: zigbee2mqtt-secrets
+              readOnly: true
+            - mountPath: /dev/ttyACM0
+              name: zstack
+      restartPolicy: Always
+      volumes:
+        - name: nfs-config
+          persistentVolumeClaim:
+            claimName: zigbee2mqtt-data
+        - name: config
+          configMap:
+            name: zigbee2mqtt-config
+        - name: zigbee2mqtt-secrets
+          secret:
+            secretName: zigbee2mqtt-secrets
+        - name: zstack
+          hostPath:
+            path: /dev/ttyACM0

@@ -18,5 +18,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: unifi
       server: https://kubernetes.default.svc
+    - namespace: zigbee2mqtt
+      server: https://kubernetes.default.svc
   sourceRepos:
     - '*'
