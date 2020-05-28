@@ -84,11 +84,11 @@ spec:
               subPath: unifi-poller.conf
           resources:
             limits:
-              cpu: "80m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "1Gi"
             requests:
-              cpu: "80m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "1Gi"
       restartPolicy: Always
       volumes:
         - name: data
