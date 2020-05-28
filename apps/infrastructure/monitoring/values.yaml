@@ -372,12 +372,7 @@ prometheus-operator:
     enabled: true
     manageCrds: true
     tlsProxy:
-      enabled: true
-      image:
-        repository: squareup/ghostunnel
-        tag: v1.5.2
-        pullPolicy: IfNotPresent
-      resources: {}
+      enabled: false
     admissionWebhooks:
       failurePolicy: Fail
       enabled: true
