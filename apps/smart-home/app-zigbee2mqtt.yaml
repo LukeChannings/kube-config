@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zigbee2mqtt
+  namespace: zigbee2mqtt
+spec:
+  destination:
+    namespace: zigbee2mqtt
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/smart-home/zigbee2mqtt
+    repoURL: 'git@github.com:LukeChannings/kube-config.git'
+    targetRevision: HEAD
+  project: smart-home
