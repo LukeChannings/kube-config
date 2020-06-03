@@ -27,12 +27,14 @@ spec:
                       - sentinel
       containers:
         - name: mosquitto
-          image: eclipse-mosquitto:1.6.9
+          image: eclipse-mosquitto:1.6.10
           ports:
             - containerPort: 8883
               name: mqtts
             - containerPort: 1883
               name: mqtt
+            - containerPort: 443
+              name: wss
           readinessProbe:
             tcpSocket:
               port: 8883

@@ -12,6 +12,7 @@ spec:
   tls:
     - hosts:
         - mqtt.private.channings.me
+        - mqttws.private.channings.me
       secretName: mosquitto-tls
   rules:
     - host: mqtt.private.channings.me
@@ -21,3 +22,10 @@ spec:
             backend:
               serviceName: mosquitto
               servicePort: mqtts
+    - host: mqttws.private.channings.me
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mosquitto
+              servicePort: wss
