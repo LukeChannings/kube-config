@@ -1,6 +1,6 @@
 dependencies:
 - name: sealed-secrets
   repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 1.10.1
-digest: sha256:40dceef2a1b685b1c2ad651016fbfbdfcd104d77e70fe0e68cfef0aa514b166f
-generated: "2020-05-13T13:06:15.062823+01:00"
+  version: 1.10.2
+digest: sha256:2d011e71d2480371a28a3054606156552b2629307daad77a1fc4c9a1fb4b6c61
+generated: "2020-06-23T19:05:47.834505+01:00"
