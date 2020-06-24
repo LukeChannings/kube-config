@@ -162,21 +162,6 @@ prometheus-operator:
         - hosts:
             - grafana.private.channings.me
           secretName: grafana-tls
-    plugins:
-      - grafana-kubernetes-app
-      - grafana-piechart-panel
-      - grafana-worldmap-panel
-      - grafana-clock-panel
-      - grafana-azure-data-explorer-datasource
-      - grafana-azure-monitor-datasource
-      - grafana-influxdb-flux-datasource
-      - grafana-googlesheets-datasource
-      - grafana-image-renderer
-      - grafana-influxdb-08-datasource
-      - grafana-kairosdb-datasource
-      - grafana-polystat-panel
-      - grafana-simple-json-datasource
-      - grafana-strava-datasource
 
     dashboardProviders:
       dashboardproviders.yaml:
