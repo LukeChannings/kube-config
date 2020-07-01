@@ -17,7 +17,7 @@ data:
       server: 'mqtt://mosquitto.mosquitto.svc.cluster.local:1883'
       version: 5
     serial:
-      port: /dev/ttyACM0
+      port: /dev/ttyUSB0
     advanced:
       network_key: '!secret network_key'
       pan_id: 0x1a66
