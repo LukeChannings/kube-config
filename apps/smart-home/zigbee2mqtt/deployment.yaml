@@ -47,7 +47,7 @@ spec:
               subPath: secret.yaml
               name: zigbee2mqtt-secrets
               readOnly: true
-            - mountPath: /dev/ttyACM0
+            - mountPath: /dev/ttyUSB0
               name: zstack
       restartPolicy: Always
       volumes:
