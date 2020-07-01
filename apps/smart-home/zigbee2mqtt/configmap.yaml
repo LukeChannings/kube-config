@@ -20,11 +20,12 @@ data:
       port: /dev/ttyACM0
     advanced:
       network_key: '!secret network_key'
-      pan_id: 0x1a64
+      pan_id: 0x1a66
       channel: 11
       log_level: info
       cache_state: true
       last_seen: 'epoch'
       adapter_concurrent: 16
+      rtscts: false
     devices: devices.yaml
     groups: groups.yaml

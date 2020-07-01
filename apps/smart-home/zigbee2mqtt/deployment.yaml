@@ -29,7 +29,7 @@ spec:
                       - sentinel
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:1.13.1
+          image: koenkk/zigbee2mqtt:1.14.1
           imagePullPolicy: Always
           env:
             - name: TZ
@@ -47,7 +47,7 @@ spec:
               subPath: secret.yaml
               name: zigbee2mqtt-secrets
               readOnly: true
-            - mountPath: /dev/ttyACM0
+            - mountPath: /dev/ttyUSB0
               name: zstack
       restartPolicy: Always
       volumes:
