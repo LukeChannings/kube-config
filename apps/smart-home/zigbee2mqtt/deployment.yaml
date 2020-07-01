@@ -62,4 +62,4 @@ spec:
             secretName: zigbee2mqtt-secrets
         - name: zstack
           hostPath:
-            path: /dev/ttyACM0
+            path: /dev/ttyUSB0
