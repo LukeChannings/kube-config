@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/infrastructure/argocd
+    repoURL: 'git@github.com:LukeChannings/kube-config.git'
+    targetRevision: HEAD
+  project: infrastructure

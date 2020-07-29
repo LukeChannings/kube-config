@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: argo
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    kubernetes.io/ingress.class: internal
+    haproxy.org/ssl-passthrough: "true"
+spec:
+  tls:
+    - hosts:
+        - argo.private.channings.me
+      secretName: argocd-secret
+  rules:
+    - host: argo.private.channings.me
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: argocd-server
+              servicePort: 443
