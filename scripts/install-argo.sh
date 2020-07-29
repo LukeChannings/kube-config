@@ -2,31 +2,50 @@
 
 set -exu -o pipefail
 
-helm repo add argo https://argoproj.github.io/argo-helm
-kubectl create ns argocd || true
+CWD="$(cwd)"
 
-# https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
-helm upgrade -i -f ./apps/infrastructure/argocd/values.bootstrap.yaml argo -n argocd argo/argo-cd
+if ! [ -d "${CWD}/secrets" ]; then
+  echo "Could not find secrets folder in ${CWD}. Make sure you're running this script from kube-config."
+fi
+
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+
+echo "Waiting for argocd to be available..."
+
+kubectl wait --for=condition=Available deployment -n argocd argocd-server
+
+kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+PORT_FORWARD_PID=$!
 
 PASSWORD="$(kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2)"
+argocd login localhost:8080 --username admin --password "$PASSWORD"
 
-echo "
-Username: admin
-Password: ${PASSWORD}
-"
+kubectl apply -f "${CWD}/secrets/kubernetes-sealed-secret-master.key"
 
-echo "Waiting 4 minutes to log in..."
+argocd repo add https://haproxytech.github.io/helm-charts/ --type helm --name haproxytech
+argocd repo add https://charts.jetstack.io/ --type helm --name jetstack
+argocd repo add https://kubernetes-charts.storage.googleapis.com --type helm --name stable
+argocd repo add https://grafana.github.io/loki/charts --type helm --name loki
 
-sleep 240
+argocd repo add git@github.com:LukeChannings/kube-config-private.git --insecure-ignore-host-key --ssh-private-key-path "${CWD}/secrets/argocd-github"
+argocd repo add git@github.com:LukeChannings/kube-config.git --insecure-ignore-host-key --ssh-private-key-path "${CWD}/secrets/argocd-github"
 
-argocd login 192.168.1.201 --username admin --password "$PASSWORD"
+argocd app create \
+  --name apps \
+  --sync-policy automated \
+  --repo git@github.com:LukeChannings/kube-config.git \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace default \
+  --path apps/apps
 
-./argo-bootstrap-cluster.sh
+argocd app sync apps
 
-echo "
-Syncing apps. Once the infrastructure is fully synced, run:
-helm upgrade -i -f ./apps/infrastructure/argocd/values.yaml argo -n argocd argo/argo-cd
+argocd app sync argocd --strategy apply; sleep 2
+argocd app sync sealed-secrets --strategy apply; sleep 2
+argocd app sync cert-manager --strategy apply; sleep 2
+argocd app sync monitoring --strategy apply; sleep 2
+argocd app sync haproxy-ingress --strategy apply; sleep 2
 
-Then re-login to argo with:
-argocd login argo.private.channings.me --username admin --password $PASSWORD
-"
+kill $PORT_FORWARD_PID
