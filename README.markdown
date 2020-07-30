@@ -23,6 +23,26 @@ k3s is installed with as little as possible. There is no [**Traefik**](https://c
 
 I'm using metallb instead of servicelb because I use a LoadBalancer service with a `loadBalancerIP`, which is unsupported by servicelb. It's also very convenient to have a virtual IP address for external services.
 
+## Q&A
+
+### Upgrading k3s
+
+Re-run `create-cluster.sh`.
+
+### Upgrading Argo
+
+Re-run `install-argo.sh`.
+
+### Upgrading Helm charts
+
+To check which charts are out-of-date, run `./scripts/helm-tools/compare-helm-versions.js`.
+
+The process:
+
+- Manually bump the chart dependency version
+- Run `helm dependencies update && helm dependencies build` to create an updated `Chart.lock`
+- Make one PR per updated dependency and roll out changes on-by-one
+
 ## Troubleshooting
 
 ### Inter-node flannel communication
