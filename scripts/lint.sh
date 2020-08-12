@@ -25,5 +25,5 @@ helm repo add jetstack https://charts.jetstack.io/
 while IFS= read -d '' -r file; do
   helm dependencies update "$(dirname "$file")" || true
   helm dependencies build "$(dirname "$file")"
-  helm lint "$(dirname "$file")"
+  helm lint --with-subcharts "$(dirname "$file")"
 done < <(find . -name 'Chart.yaml' -print0)
