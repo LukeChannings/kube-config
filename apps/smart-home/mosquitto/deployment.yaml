@@ -27,7 +27,7 @@ spec:
                       - sentinel
       containers:
         - name: mosquitto
-          image: eclipse-mosquitto:1.6.10
+          image: eclipse-mosquitto:1.6.12
           ports:
             - containerPort: 8883
               name: mqtts
