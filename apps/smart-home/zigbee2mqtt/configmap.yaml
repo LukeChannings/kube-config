@@ -21,7 +21,7 @@ data:
     advanced:
       network_key: '!secret network_key'
       pan_id: 0x1a67
-      channel: 25
+      channel: 20
       log_level: info
       cache_state: true
       last_seen: 'epoch'
