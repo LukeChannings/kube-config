@@ -20,12 +20,10 @@ data:
       port: /dev/ttyUSB0
     advanced:
       network_key: '!secret network_key'
-      pan_id: 0x1a66
-      channel: 11
+      pan_id: 0x1a67
+      channel: 25
       log_level: info
       cache_state: true
       last_seen: 'epoch'
-      adapter_concurrent: 16
-      rtscts: false
     devices: devices.yaml
     groups: groups.yaml
