@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: linuxserver/unifi-controller:5.12.72-ls59
+          image: linuxserver/unifi-controller:5.14.23-ls75
           resources:
             limits:
               cpu: "150m"
