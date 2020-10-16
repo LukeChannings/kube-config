@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: zigbee2mqtt
+  namespace: zigbee2mqtt
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    kubernetes.io/ingress.class: internal
+spec:
+  tls:
+    - hosts:
+        - zigbee2mqtt.private.channings.me
+      secretName: zigbee2mqtt-tls
+  rules:
+    - host: zigbee2mqtt.private.channings.me
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: zigbee2mqtt
+              servicePort: http

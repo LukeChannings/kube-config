@@ -27,3 +27,7 @@ data:
       last_seen: 'epoch'
     devices: devices.yaml
     groups: groups.yaml
+    frontend:
+      port: 80
+    experimental:
+      new_api: true
