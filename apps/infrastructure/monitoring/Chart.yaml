@@ -4,5 +4,5 @@ version: 1.0.0
 name: monitoring
 dependencies:
   - name: prometheus-operator
-    version: 8.15.6
+    version: 9.3.2
     repository: https://kubernetes-charts.storage.googleapis.com/
