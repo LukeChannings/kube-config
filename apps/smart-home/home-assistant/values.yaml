@@ -1,7 +1,7 @@
 ---
 home-assistant:
   image:
-    tag: 0.115.5
+    tag: 0.116.4
   ingress:
     enabled: true
     annotations:
