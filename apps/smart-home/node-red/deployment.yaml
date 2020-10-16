@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: node-red
-          image: nodered/node-red:1.1.3
+          image: nodered/node-red:1.2.1
           imagePullPolicy: IfNotPresent
           readinessProbe:
             tcpSocket:
