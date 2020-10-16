@@ -2,15 +2,14 @@
 
 set -exu -o pipefail
 
-CWD="$(cwd)"
+CWD="$(pwd)"
 
 if ! [ -d "${CWD}/secrets" ]; then
   echo "Could not find secrets folder in ${CWD}. Make sure you're running this script from kube-config."
 fi
 
-kubectl create namespace argocd
+kubectl create namespace argocd || true
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-
 
 echo "Waiting for argocd to be available..."
 
