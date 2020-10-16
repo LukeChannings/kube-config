@@ -4,7 +4,7 @@ internal:
     ingressClass: internal
     defaultTLSSecret:
       enabled: true
-      secret: haproxy-ingress/haproxy-internal-tls
+      secret: haproxy-internal-tls
     service:
       type: LoadBalancer
       loadBalancerIP: "192.168.1.200"
@@ -22,7 +22,7 @@ external:
     ingressClass: external
     defaultTLSSecret:
       enabled: true
-      secret: haproxy-ingress/haproxy-external-tls
+      secret: haproxy-external-tls
     service:
       type: LoadBalancer
       loadBalancerIP: "192.168.1.250"
