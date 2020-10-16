@@ -13,3 +13,6 @@ spec:
     repoURL: 'git@github.com:LukeChannings/kube-config.git'
     targetRevision: HEAD
   project: infrastructure
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
