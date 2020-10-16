@@ -3,22 +3,29 @@
   "kind": "CustomResourceDefinition",
   "metadata": {
     "annotations": {
-      "cert-manager.io/inject-ca-from-secret": "cert-manager/cert-manager-webhook-tls",
-      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1beta1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{\"cert-manager.io/inject-ca-from-secret\":\"cert-manager/cert-manager-webhook-tls\"},\"name\":\"certificaterequests.cert-manager.io\"},\"spec\":{\"additionalPrinterColumns\":[{\"JSONPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"JSONPath\":\".spec.issuerRef.name\",\"name\":\"Issuer\",\"priority\":1,\"type\":\"string\"},{\"JSONPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].message\",\"name\":\"Status\",\"priority\":1,\"type\":\"string\"},{\"JSONPath\":\".metadata.creationTimestamp\",\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\",\"name\":\"Age\",\"type\":\"date\"}],\"conversion\":{\"strategy\":\"Webhook\",\"webhookClientConfig\":{\"service\":{\"name\":\"cert-manager-webhook\",\"namespace\":\"cert-manager\",\"path\":\"/convert\"}}},\"group\":\"cert-manager.io\",\"names\":{\"kind\":\"CertificateRequest\",\"listKind\":\"CertificateRequestList\",\"plural\":\"certificaterequests\",\"shortNames\":[\"cr\",\"crs\"],\"singular\":\"certificaterequest\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"subresources\":{\"status\":{}},\"validation\":{\"openAPIV3Schema\":{\"description\":\"CertificateRequest is a type to represent a Certificate Signing Request\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"description\":\"CertificateRequestSpec defines the desired state of CertificateRequest\",\"properties\":{\"csr\":{\"description\":\"Byte slice containing the PEM encoded CertificateSigningRequest\",\"format\":\"byte\",\"type\":\"string\"},\"duration\":{\"description\":\"Requested certificate default Duration\",\"type\":\"string\"},\"isCA\":{\"description\":\"IsCA will mark the resulting certificate as valid for signing. This implies that the 'cert sign' usage is set\",\"type\":\"boolean\"},\"issuerRef\":{\"description\":\"IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.\",\"properties\":{\"group\":{\"type\":\"string\"},\"kind\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"required\":[\"name\"],\"type\":\"object\"},\"usages\":{\"description\":\"Usages is the set of x509 actions that are enabled for a given key. Defaults are ('digital signature', 'key encipherment') if empty\",\"items\":{\"description\":\"KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \\\"signing\\\", \\\"digital signature\\\", \\\"content commitment\\\", \\\"key encipherment\\\", \\\"key agreement\\\", \\\"data encipherment\\\", \\\"cert sign\\\", \\\"crl sign\\\", \\\"encipher only\\\", \\\"decipher only\\\", \\\"any\\\", \\\"server auth\\\", \\\"client auth\\\", \\\"code signing\\\", \\\"email protection\\\", \\\"s/mime\\\", \\\"ipsec end system\\\", \\\"ipsec tunnel\\\", \\\"ipsec user\\\", \\\"timestamping\\\", \\\"ocsp signing\\\", \\\"microsoft sgc\\\", \\\"netscape sgc\\\"\",\"enum\":[\"signing\",\"digital signature\",\"content commitment\",\"key encipherment\",\"key agreement\",\"data encipherment\",\"cert sign\",\"crl sign\",\"encipher only\",\"decipher only\",\"any\",\"server auth\",\"client auth\",\"code signing\",\"email protection\",\"s/mime\",\"ipsec end system\",\"ipsec tunnel\",\"ipsec user\",\"timestamping\",\"ocsp signing\",\"microsoft sgc\",\"netscape sgc\"],\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"csr\",\"issuerRef\"],\"type\":\"object\"},\"status\":{\"description\":\"CertificateStatus defines the observed state of CertificateRequest and resulting signed certificate.\",\"properties\":{\"ca\":{\"description\":\"Byte slice containing the PEM encoded certificate authority of the signed certificate.\",\"format\":\"byte\",\"type\":\"string\"},\"certificate\":{\"description\":\"Byte slice containing a PEM encoded signed certificate resulting from the given certificate signing request.\",\"format\":\"byte\",\"type\":\"string\"},\"conditions\":{\"items\":{\"description\":\"CertificateRequestCondition contains condition information for a CertificateRequest.\",\"properties\":{\"lastTransitionTime\":{\"description\":\"LastTransitionTime is the timestamp corresponding to the last status change of this condition.\",\"format\":\"date-time\",\"type\":\"string\"},\"message\":{\"description\":\"Message is a human readable description of the details of the last transition, complementing reason.\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason is a brief machine readable explanation for the condition's last transition.\",\"type\":\"string\"},\"status\":{\"description\":\"Status of the condition, one of ('True', 'False', 'Unknown').\",\"enum\":[\"True\",\"False\",\"Unknown\"],\"type\":\"string\"},\"type\":{\"description\":\"Type of the condition, currently ('Ready', 'InvalidRequest').\",\"type\":\"string\"}},\"required\":[\"status\",\"type\"],\"type\":\"object\"},\"type\":\"array\"},\"failureTime\":{\"description\":\"FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"versions\":[{\"name\":\"v1alpha2\",\"served\":true,\"storage\":true},{\"name\":\"v1alpha3\",\"served\":true,\"storage\":false}]}}\n"
+      "cert-manager.io/inject-ca-from-secret": "cert-manager/cert-manager-webhook-ca",
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{\"cert-manager.io/inject-ca-from-secret\":\"cert-manager/cert-manager-webhook-ca\"},\"labels\":{\"app\":\"cert-manager\",\"app.kubernetes.io/instance\":\"cert-manager\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"cert-manager\",\"helm.sh/chart\":\"cert-manager-v1.0.3\"},\"name\":\"certificaterequests.cert-manager.io\"},\"spec\":{\"conversion\":{\"strategy\":\"Webhook\",\"webhook\":{\"clientConfig\":{\"service\":{\"name\":\"cert-manager-webhook\",\"namespace\":\"cert-manager\",\"path\":\"/convert\"}},\"conversionReviewVersions\":[\"v1\",\"v1beta1\"]}},\"group\":\"cert-manager.io\",\"names\":{\"kind\":\"CertificateRequest\",\"listKind\":\"CertificateRequestList\",\"plural\":\"certificaterequests\",\"shortNames\":[\"cr\",\"crs\"],\"singular\":\"certificaterequest\"},\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"jsonPath\":\".spec.issuerRef.name\",\"name\":\"Issuer\",\"priority\":1,\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].message\",\"name\":\"Status\",\"priority\":1,\"type\":\"string\"},{\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\",\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"}],\"name\":\"v1alpha2\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"A CertificateRequest is used to request a signed certificate from one of the configured issuers. \\n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \\n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"description\":\"Desired state of the CertificateRequest resource.\",\"properties\":{\"csr\":{\"description\":\"The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.\",\"format\":\"byte\",\"type\":\"string\"},\"duration\":{\"description\":\"The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.\",\"type\":\"string\"},\"isCA\":{\"description\":\"IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.\",\"type\":\"boolean\"},\"issuerRef\":{\"description\":\"IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.\",\"properties\":{\"group\":{\"description\":\"Group of the resource being referred to.\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind of the resource being referred to.\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the resource being referred to.\",\"type\":\"string\"}},\"required\":[\"name\"],\"type\":\"object\"},\"usages\":{\"description\":\"Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.\",\"items\":{\"description\":\"KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \\\"signing\\\", \\\"digital signature\\\", \\\"content commitment\\\", \\\"key encipherment\\\", \\\"key agreement\\\", \\\"data encipherment\\\", \\\"cert sign\\\", \\\"crl sign\\\", \\\"encipher only\\\", \\\"decipher only\\\", \\\"any\\\", \\\"server auth\\\", \\\"client auth\\\", \\\"code signing\\\", \\\"email protection\\\", \\\"s/mime\\\", \\\"ipsec end system\\\", \\\"ipsec tunnel\\\", \\\"ipsec user\\\", \\\"timestamping\\\", \\\"ocsp signing\\\", \\\"microsoft sgc\\\", \\\"netscape sgc\\\"\",\"enum\":[\"signing\",\"digital signature\",\"content commitment\",\"key encipherment\",\"key agreement\",\"data encipherment\",\"cert sign\",\"crl sign\",\"encipher only\",\"decipher only\",\"any\",\"server auth\",\"client auth\",\"code signing\",\"email protection\",\"s/mime\",\"ipsec end system\",\"ipsec tunnel\",\"ipsec user\",\"timestamping\",\"ocsp signing\",\"microsoft sgc\",\"netscape sgc\"],\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"csr\",\"issuerRef\"],\"type\":\"object\"},\"status\":{\"description\":\"Status of the CertificateRequest. This is set and managed automatically.\",\"properties\":{\"ca\":{\"description\":\"The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.\",\"format\":\"byte\",\"type\":\"string\"},\"certificate\":{\"description\":\"The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.\",\"format\":\"byte\",\"type\":\"string\"},\"conditions\":{\"description\":\"List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.\",\"items\":{\"description\":\"CertificateRequestCondition contains condition information for a CertificateRequest.\",\"properties\":{\"lastTransitionTime\":{\"description\":\"LastTransitionTime is the timestamp corresponding to the last status change of this condition.\",\"format\":\"date-time\",\"type\":\"string\"},\"message\":{\"description\":\"Message is a human readable description of the details of the last transition, complementing reason.\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason is a brief machine readable explanation for the condition's last transition.\",\"type\":\"string\"},\"status\":{\"description\":\"Status of the condition, one of ('True', 'False', 'Unknown').\",\"enum\":[\"True\",\"False\",\"Unknown\"],\"type\":\"string\"},\"type\":{\"description\":\"Type of the condition, known values are ('Ready', 'InvalidRequest').\",\"type\":\"string\"}},\"required\":[\"status\",\"type\"],\"type\":\"object\"},\"type\":\"array\"},\"failureTime\":{\"description\":\"FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"jsonPath\":\".spec.issuerRef.name\",\"name\":\"Issuer\",\"priority\":1,\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].message\",\"name\":\"Status\",\"priority\":1,\"type\":\"string\"},{\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\",\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"}],\"name\":\"v1alpha3\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"A CertificateRequest is used to request a signed certificate from one of the configured issuers. \\n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \\n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"description\":\"Desired state of the CertificateRequest resource.\",\"properties\":{\"csr\":{\"description\":\"The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.\",\"format\":\"byte\",\"type\":\"string\"},\"duration\":{\"description\":\"The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.\",\"type\":\"string\"},\"isCA\":{\"description\":\"IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.\",\"type\":\"boolean\"},\"issuerRef\":{\"description\":\"IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.\",\"properties\":{\"group\":{\"description\":\"Group of the resource being referred to.\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind of the resource being referred to.\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the resource being referred to.\",\"type\":\"string\"}},\"required\":[\"name\"],\"type\":\"object\"},\"usages\":{\"description\":\"Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.\",\"items\":{\"description\":\"KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \\\"signing\\\", \\\"digital signature\\\", \\\"content commitment\\\", \\\"key encipherment\\\", \\\"key agreement\\\", \\\"data encipherment\\\", \\\"cert sign\\\", \\\"crl sign\\\", \\\"encipher only\\\", \\\"decipher only\\\", \\\"any\\\", \\\"server auth\\\", \\\"client auth\\\", \\\"code signing\\\", \\\"email protection\\\", \\\"s/mime\\\", \\\"ipsec end system\\\", \\\"ipsec tunnel\\\", \\\"ipsec user\\\", \\\"timestamping\\\", \\\"ocsp signing\\\", \\\"microsoft sgc\\\", \\\"netscape sgc\\\"\",\"enum\":[\"signing\",\"digital signature\",\"content commitment\",\"key encipherment\",\"key agreement\",\"data encipherment\",\"cert sign\",\"crl sign\",\"encipher only\",\"decipher only\",\"any\",\"server auth\",\"client auth\",\"code signing\",\"email protection\",\"s/mime\",\"ipsec end system\",\"ipsec tunnel\",\"ipsec user\",\"timestamping\",\"ocsp signing\",\"microsoft sgc\",\"netscape sgc\"],\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"csr\",\"issuerRef\"],\"type\":\"object\"},\"status\":{\"description\":\"Status of the CertificateRequest. This is set and managed automatically.\",\"properties\":{\"ca\":{\"description\":\"The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.\",\"format\":\"byte\",\"type\":\"string\"},\"certificate\":{\"description\":\"The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.\",\"format\":\"byte\",\"type\":\"string\"},\"conditions\":{\"description\":\"List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.\",\"items\":{\"description\":\"CertificateRequestCondition contains condition information for a CertificateRequest.\",\"properties\":{\"lastTransitionTime\":{\"description\":\"LastTransitionTime is the timestamp corresponding to the last status change of this condition.\",\"format\":\"date-time\",\"type\":\"string\"},\"message\":{\"description\":\"Message is a human readable description of the details of the last transition, complementing reason.\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason is a brief machine readable explanation for the condition's last transition.\",\"type\":\"string\"},\"status\":{\"description\":\"Status of the condition, one of ('True', 'False', 'Unknown').\",\"enum\":[\"True\",\"False\",\"Unknown\"],\"type\":\"string\"},\"type\":{\"description\":\"Type of the condition, known values are ('Ready', 'InvalidRequest').\",\"type\":\"string\"}},\"required\":[\"status\",\"type\"],\"type\":\"object\"},\"type\":\"array\"},\"failureTime\":{\"description\":\"FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"jsonPath\":\".spec.issuerRef.name\",\"name\":\"Issuer\",\"priority\":1,\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].message\",\"name\":\"Status\",\"priority\":1,\"type\":\"string\"},{\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\",\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"A CertificateRequest is used to request a signed certificate from one of the configured issuers. \\n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \\n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"description\":\"Desired state of the CertificateRequest resource.\",\"properties\":{\"duration\":{\"description\":\"The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.\",\"type\":\"string\"},\"isCA\":{\"description\":\"IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.\",\"type\":\"boolean\"},\"issuerRef\":{\"description\":\"IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.\",\"properties\":{\"group\":{\"description\":\"Group of the resource being referred to.\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind of the resource being referred to.\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the resource being referred to.\",\"type\":\"string\"}},\"required\":[\"name\"],\"type\":\"object\"},\"request\":{\"description\":\"The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.\",\"format\":\"byte\",\"type\":\"string\"},\"usages\":{\"description\":\"Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.\",\"items\":{\"description\":\"KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \\\"signing\\\", \\\"digital signature\\\", \\\"content commitment\\\", \\\"key encipherment\\\", \\\"key agreement\\\", \\\"data encipherment\\\", \\\"cert sign\\\", \\\"crl sign\\\", \\\"encipher only\\\", \\\"decipher only\\\", \\\"any\\\", \\\"server auth\\\", \\\"client auth\\\", \\\"code signing\\\", \\\"email protection\\\", \\\"s/mime\\\", \\\"ipsec end system\\\", \\\"ipsec tunnel\\\", \\\"ipsec user\\\", \\\"timestamping\\\", \\\"ocsp signing\\\", \\\"microsoft sgc\\\", \\\"netscape sgc\\\"\",\"enum\":[\"signing\",\"digital signature\",\"content commitment\",\"key encipherment\",\"key agreement\",\"data encipherment\",\"cert sign\",\"crl sign\",\"encipher only\",\"decipher only\",\"any\",\"server auth\",\"client auth\",\"code signing\",\"email protection\",\"s/mime\",\"ipsec end system\",\"ipsec tunnel\",\"ipsec user\",\"timestamping\",\"ocsp signing\",\"microsoft sgc\",\"netscape sgc\"],\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"issuerRef\",\"request\"],\"type\":\"object\"},\"status\":{\"description\":\"Status of the CertificateRequest. This is set and managed automatically.\",\"properties\":{\"ca\":{\"description\":\"The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.\",\"format\":\"byte\",\"type\":\"string\"},\"certificate\":{\"description\":\"The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.\",\"format\":\"byte\",\"type\":\"string\"},\"conditions\":{\"description\":\"List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.\",\"items\":{\"description\":\"CertificateRequestCondition contains condition information for a CertificateRequest.\",\"properties\":{\"lastTransitionTime\":{\"description\":\"LastTransitionTime is the timestamp corresponding to the last status change of this condition.\",\"format\":\"date-time\",\"type\":\"string\"},\"message\":{\"description\":\"Message is a human readable description of the details of the last transition, complementing reason.\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason is a brief machine readable explanation for the condition's last transition.\",\"type\":\"string\"},\"status\":{\"description\":\"Status of the condition, one of ('True', 'False', 'Unknown').\",\"enum\":[\"True\",\"False\",\"Unknown\"],\"type\":\"string\"},\"type\":{\"description\":\"Type of the condition, known values are ('Ready', 'InvalidRequest').\",\"type\":\"string\"}},\"required\":[\"status\",\"type\"],\"type\":\"object\"},\"type\":\"array\"},\"failureTime\":{\"description\":\"FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"required\":[\"spec\"],\"type\":\"object\"}},\"served\":true,\"storage\":false,\"subresources\":{\"status\":{}}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"jsonPath\":\".spec.issuerRef.name\",\"name\":\"Issuer\",\"priority\":1,\"type\":\"string\"},{\"jsonPath\":\".status.conditions[?(@.type==\\\"Ready\\\")].message\",\"name\":\"Status\",\"priority\":1,\"type\":\"string\"},{\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\",\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"}],\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"A CertificateRequest is used to request a signed certificate from one of the configured issuers. \\n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \\n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"description\":\"Desired state of the CertificateRequest resource.\",\"properties\":{\"duration\":{\"description\":\"The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.\",\"type\":\"string\"},\"isCA\":{\"description\":\"IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.\",\"type\":\"boolean\"},\"issuerRef\":{\"description\":\"IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.\",\"properties\":{\"group\":{\"description\":\"Group of the resource being referred to.\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind of the resource being referred to.\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the resource being referred to.\",\"type\":\"string\"}},\"required\":[\"name\"],\"type\":\"object\"},\"request\":{\"description\":\"The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.\",\"format\":\"byte\",\"type\":\"string\"},\"usages\":{\"description\":\"Usages is the set of x509 usages that are requested for the certificate. If usages are set they SHOULD be encoded inside the CSR spec Defaults to `digital signature` and `key encipherment` if not specified.\",\"items\":{\"description\":\"KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \\\"signing\\\", \\\"digital signature\\\", \\\"content commitment\\\", \\\"key encipherment\\\", \\\"key agreement\\\", \\\"data encipherment\\\", \\\"cert sign\\\", \\\"crl sign\\\", \\\"encipher only\\\", \\\"decipher only\\\", \\\"any\\\", \\\"server auth\\\", \\\"client auth\\\", \\\"code signing\\\", \\\"email protection\\\", \\\"s/mime\\\", \\\"ipsec end system\\\", \\\"ipsec tunnel\\\", \\\"ipsec user\\\", \\\"timestamping\\\", \\\"ocsp signing\\\", \\\"microsoft sgc\\\", \\\"netscape sgc\\\"\",\"enum\":[\"signing\",\"digital signature\",\"content commitment\",\"key encipherment\",\"key agreement\",\"data encipherment\",\"cert sign\",\"crl sign\",\"encipher only\",\"decipher only\",\"any\",\"server auth\",\"client auth\",\"code signing\",\"email protection\",\"s/mime\",\"ipsec end system\",\"ipsec tunnel\",\"ipsec user\",\"timestamping\",\"ocsp signing\",\"microsoft sgc\",\"netscape sgc\"],\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"issuerRef\",\"request\"],\"type\":\"object\"},\"status\":{\"description\":\"Status of the CertificateRequest. This is set and managed automatically.\",\"properties\":{\"ca\":{\"description\":\"The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.\",\"format\":\"byte\",\"type\":\"string\"},\"certificate\":{\"description\":\"The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.\",\"format\":\"byte\",\"type\":\"string\"},\"conditions\":{\"description\":\"List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.\",\"items\":{\"description\":\"CertificateRequestCondition contains condition information for a CertificateRequest.\",\"properties\":{\"lastTransitionTime\":{\"description\":\"LastTransitionTime is the timestamp corresponding to the last status change of this condition.\",\"format\":\"date-time\",\"type\":\"string\"},\"message\":{\"description\":\"Message is a human readable description of the details of the last transition, complementing reason.\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason is a brief machine readable explanation for the condition's last transition.\",\"type\":\"string\"},\"status\":{\"description\":\"Status of the condition, one of ('True', 'False', 'Unknown').\",\"enum\":[\"True\",\"False\",\"Unknown\"],\"type\":\"string\"},\"type\":{\"description\":\"Type of the condition, known values are ('Ready', 'InvalidRequest').\",\"type\":\"string\"}},\"required\":[\"status\",\"type\"],\"type\":\"object\"},\"type\":\"array\"},\"failureTime\":{\"description\":\"FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}},\"required\":[\"spec\"],\"type\":\"object\"}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]},\"status\":{\"acceptedNames\":{\"kind\":\"\",\"plural\":\"\"},\"conditions\":[],\"storedVersions\":[]}}\n"
     },
-    "creationTimestamp": "2020-05-02T17:12:34Z",
-    "generation": 2,
+    "creationTimestamp": "2020-05-08T12:37:59Z",
+    "generation": 3,
+    "labels": {
+      "app": "cert-manager",
+      "app.kubernetes.io/instance": "cert-manager",
+      "app.kubernetes.io/managed-by": "Helm",
+      "app.kubernetes.io/name": "cert-manager",
+      "helm.sh/chart": "cert-manager-v1.0.3"
+    },
     "name": "certificaterequests.cert-manager.io",
-    "resourceVersion": "14492",
+    "resourceVersion": "31747883",
     "selfLink": "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/certificaterequests.cert-manager.io",
-    "uid": "41c30f42-0191-45b0-8103-eab026b4964b"
+    "uid": "ec49409e-60aa-4628-ab14-dd34289c2402"
   },
   "spec": {
     "conversion": {
       "strategy": "Webhook",
       "webhook": {
         "clientConfig": {
-          "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURRekNDQWl1Z0F3SUJBZ0lSQU1MVW1FTC8zTWlmYk9iZlR0NmI3NTB3RFFZSktvWklodmNOQVFFTEJRQXcKUURFY01Cb0dBMVVFQ2hNVFkyVnlkQzF0WVc1aFoyVnlMbk41YzNSbGJURWdNQjRHQTFVRUF4TVhZMlZ5ZEMxdApZVzVoWjJWeUxuZGxZbWh2YjJzdVkyRXdIaGNOTWpBd05UQXlNVGN4TWpReFdoY05NalV3TlRBeE1UY3hNalF4CldqQkFNUnd3R2dZRFZRUUtFeE5qWlhKMExXMWhibUZuWlhJdWMzbHpkR1Z0TVNBd0hnWURWUVFERXhkalpYSjAKTFcxaGJtRm5aWEl1ZDJWaWFHOXZheTVqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQwpnZ0VCQU1tSnR3RkRrTkozM0p4Yjd5SGNrQkdNN0xEWWt1ZXlweEJlWC9mcmJMTG9zNm50MHBFdkF2K293MklsCjJFM1UwUXQrTzlKZ0h1K1ZzTXV0U3kxVm95TzBPZE9DM0FoM3d4N2NLNXIxUmVZamRZYUluL21TTzI2WUowL1YKeGU0SzRvbFhqQmdOQnU0RUJKMWU1bCtOYjBaejQwY25MMllEclFraG9nTC8yQUVmRHppdU1jZEwyUllmdWhVZwpTQWxOOVlEcDJ4WHVYVmt4SmJJS3FzWmJrVmE4UlpNV2l5dDV2R0NMb0lLUk1hb1o5RnlWa2c3bGxNc3pQeXBsCkZVcUlrQkkxTkUzTlZpYXFodFhEM29HWWx0QWNRdWIwTzNicTBodDRRZkl3ZFdnSTlFU0ZYajJQWXdKejhJSHQKeHJ1cmt3ZHlCTURFU1NtbklLQUFYK040TUk4Q0F3RUFBYU00TURZd0RnWURWUjBQQVFIL0JBUURBZ0trTUJNRwpBMVVkSlFRTU1Bb0dDQ3NHQVFVRkJ3TUJNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEUVlKS29aSWh2Y05BUUVMCkJRQURnZ0VCQUpaYVlibGZON1gySS9GVElSb1hvNFcwRGoxZXphbGcxT0JHWmJRcXRGcGhwd1pCNGVHbVRZOGsKMTYzSkIwdHlDMHYrQ1dtaEtCR2hPd1FpODVjUzU3dmJ6WmlKTUVLTnJvamh4V0dkSE80UzVJQmpvU01wVkxwZQpDQWZ6WFN0Q3F1Q05nSkFHWEdabE9Uc21vSnVEaXhndEtpZFpxTTVBbndXTVFyL3FNUmtsbmxhYmNTSXFKZmp0ClZIZkx6Q3pIak5vMEtUUUtCUVBxdStvQXcxdC9BT09TazVrT2hvOHc1UVVHbzNsZHRlK3UwanZseFVMRXp5c1EKck4raGRWb1k3VVRuRnlqazhQMWY5WUFIY1BUd1NTeDN4NDFBQi9XWFlBZ083MmllSytrNHlLZmdJdzMxN1cyeApZNFZJQk9RY3lEM0wrZll0Y0lrNU5LQ2JrQW01MmhrPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+          "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURRekNDQWl1Z0F3SUJBZ0lSQU0yQXg1eHJ1QzVGUCtnb0ljMlZsaUF3RFFZSktvWklodmNOQVFFTEJRQXcKUURFY01Cb0dBMVVFQ2hNVFkyVnlkQzF0WVc1aFoyVnlMbk41YzNSbGJURWdNQjRHQTFVRUF4TVhZMlZ5ZEMxdApZVzVoWjJWeUxuZGxZbWh2YjJzdVkyRXdIaGNOTWpBd05UQTRNVEl6T0RBM1doY05NalV3TlRBM01USXpPREEzCldqQkFNUnd3R2dZRFZRUUtFeE5qWlhKMExXMWhibUZuWlhJdWMzbHpkR1Z0TVNBd0hnWURWUVFERXhkalpYSjAKTFcxaGJtRm5aWEl1ZDJWaWFHOXZheTVqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQwpnZ0VCQUpVelIxeHI0K0tBb3RTYkJBSURxNzc1ZnVWOUZRK3YrSU9DVGdUb1h0ZjMwb042THNwNVhGTXdzbmpNCkRxYTlpYzhsUTI0ZnVidTBKR1MrRGpXS0VzWElIMFp3Q2NxRXZsdXM2V1RKcGoxazJuZllGWlo5TjdTUURHL04KM3ozZ3Rad2hiVVJVeVJLNWlDUFpiVzl3R0U0NEVPRnExZEh6NWJxajlTVFA0ZmloYUJXNGVHcGFGOS85Y1M3RApMMXYvbTFnSlhqTTg4dy8zbDlwZGl1STN4S1BRUnRPVHRuczYzR0owQ0d1UVlBeTlqbVhFZFZkTlJQS0Q0UHpBCmt0Y29sWkVCU2pLdkRRdkNmQkthVU1aT2h1Z2loc2Q5dDBrZEJlaU04QXJHbWRTWnhsSEtMbmV6NGhCZ0dJS3EKNlZZbVJrVUpYWnBBZDZEQ0hKNkNNQ1pKMDBrQ0F3RUFBYU00TURZd0RnWURWUjBQQVFIL0JBUURBZ0trTUJNRwpBMVVkSlFRTU1Bb0dDQ3NHQVFVRkJ3TUJNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEUVlKS29aSWh2Y05BUUVMCkJRQURnZ0VCQUJYK3hmelYrb0FIUEVocUN4Yi9MUFl0czRCTUNlMGFYRjBRS3JYT1Z2QTZhVG16UGxPUFhwRmsKaWo3WnByVis5VjBhc3MweThXSUYyay9EZWhrL2FRU1p0ZWNoTFVzRlN3Z0FtYXhXZDhWZVBYZWJTSVJlYi9TSwpRZ3U5TVNPVEpMUVFCeFcvcEt0dFp4RUFWcGRrYVpUK0ZuSDBSaTV3N1pVZ3FwVU1KMGIyVHRzZ2NIMmFySXBrCjhuRXlsWkV4UU5mVVZjaXg5NVA4Q3YzMjQ2R3d6V29BRWdJTHQ1OWN6N1psNFZUU1N0RFIwZTZSc2J0cFR3bjQKVkF0Y3hLRmdxRlgzb1RMeXhXclU2WHdzNkozUnpTcFlOODNnZUhlRmViRHl5dGV5eWtFTnRFNnNuT3NpVk1OUApzMmI4WFhWd3NLZ1dCV2FFMFJqdDNuTWJYYmUrOU5ZPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
           "service": {
             "name": "cert-manager-webhook",
             "namespace": "cert-manager",
@@ -27,6 +34,7 @@
           }
         },
         "conversionReviewVersions": [
+          "v1",
           "v1beta1"
         ]
       }
@@ -73,7 +81,7 @@
         "name": "v1alpha2",
         "schema": {
           "openAPIV3Schema": {
-            "description": "CertificateRequest is a type to represent a Certificate Signing Request",
+            "description": "A CertificateRequest is used to request a signed certificate from one of the configured issuers. \n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.",
             "properties": {
               "apiVersion": {
                 "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -87,31 +95,34 @@
                 "type": "object"
               },
               "spec": {
-                "description": "CertificateRequestSpec defines the desired state of CertificateRequest",
+                "description": "Desired state of the CertificateRequest resource.",
                 "properties": {
                   "csr": {
-                    "description": "Byte slice containing the PEM encoded CertificateSigningRequest",
+                    "description": "The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.",
                     "format": "byte",
                     "type": "string"
                   },
                   "duration": {
-                    "description": "Requested certificate default Duration",
+                    "description": "The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.",
                     "type": "string"
                   },
                   "isCA": {
-                    "description": "IsCA will mark the resulting certificate as valid for signing. This implies that the 'cert sign' usage is set",
+                    "description": "IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.",
                     "type": "boolean"
                   },
                   "issuerRef": {
                     "description": "IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.",
                     "properties": {
                       "group": {
+                        "description": "Group of the resource being referred to.",
                         "type": "string"
                       },
                       "kind": {
+                        "description": "Kind of the resource being referred to.",
                         "type": "string"
                       },
                       "name": {
+                        "description": "Name of the resource being referred to.",
                         "type": "string"
                       }
                     },
@@ -121,7 +132,7 @@
                     "type": "object"
                   },
                   "usages": {
-                    "description": "Usages is the set of x509 actions that are enabled for a given key. Defaults are ('digital signature', 'key encipherment') if empty",
+                    "description": "Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.",
                     "items": {
                       "description": "KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \"signing\", \"digital signature\", \"content commitment\", \"key encipherment\", \"key agreement\", \"data encipherment\", \"cert sign\", \"crl sign\", \"encipher only\", \"decipher only\", \"any\", \"server auth\", \"client auth\", \"code signing\", \"email protection\", \"s/mime\", \"ipsec end system\", \"ipsec tunnel\", \"ipsec user\", \"timestamping\", \"ocsp signing\", \"microsoft sgc\", \"netscape sgc\"",
                       "enum": [
@@ -161,19 +172,20 @@
                 "type": "object"
               },
               "status": {
-                "description": "CertificateStatus defines the observed state of CertificateRequest and resulting signed certificate.",
+                "description": "Status of the CertificateRequest. This is set and managed automatically.",
                 "properties": {
                   "ca": {
-                    "description": "Byte slice containing the PEM encoded certificate authority of the signed certificate.",
+                    "description": "The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.",
                     "format": "byte",
                     "type": "string"
                   },
                   "certificate": {
-                    "description": "Byte slice containing a PEM encoded signed certificate resulting from the given certificate signing request.",
+                    "description": "The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.",
                     "format": "byte",
                     "type": "string"
                   },
                   "conditions": {
+                    "description": "List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.",
                     "items": {
                       "description": "CertificateRequestCondition contains condition information for a CertificateRequest.",
                       "properties": {
@@ -200,7 +212,7 @@
                           "type": "string"
                         },
                         "type": {
-                          "description": "Type of the condition, currently ('Ready', 'InvalidRequest').",
+                          "description": "Type of the condition, known values are ('Ready', 'InvalidRequest').",
                           "type": "string"
                         }
                       },
@@ -225,7 +237,7 @@
           }
         },
         "served": true,
-        "storage": true,
+        "storage": false,
         "subresources": {
           "status": {}
         }
@@ -259,7 +271,7 @@
         "name": "v1alpha3",
         "schema": {
           "openAPIV3Schema": {
-            "description": "CertificateRequest is a type to represent a Certificate Signing Request",
+            "description": "A CertificateRequest is used to request a signed certificate from one of the configured issuers. \n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.",
             "properties": {
               "apiVersion": {
                 "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -273,31 +285,34 @@
                 "type": "object"
               },
               "spec": {
-                "description": "CertificateRequestSpec defines the desired state of CertificateRequest",
+                "description": "Desired state of the CertificateRequest resource.",
                 "properties": {
                   "csr": {
-                    "description": "Byte slice containing the PEM encoded CertificateSigningRequest",
+                    "description": "The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.",
                     "format": "byte",
                     "type": "string"
                   },
                   "duration": {
-                    "description": "Requested certificate default Duration",
+                    "description": "The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.",
                     "type": "string"
                   },
                   "isCA": {
-                    "description": "IsCA will mark the resulting certificate as valid for signing. This implies that the 'cert sign' usage is set",
+                    "description": "IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.",
                     "type": "boolean"
                   },
                   "issuerRef": {
                     "description": "IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.",
                     "properties": {
                       "group": {
+                        "description": "Group of the resource being referred to.",
                         "type": "string"
                       },
                       "kind": {
+                        "description": "Kind of the resource being referred to.",
                         "type": "string"
                       },
                       "name": {
+                        "description": "Name of the resource being referred to.",
                         "type": "string"
                       }
                     },
@@ -307,7 +322,7 @@
                     "type": "object"
                   },
                   "usages": {
-                    "description": "Usages is the set of x509 actions that are enabled for a given key. Defaults are ('digital signature', 'key encipherment') if empty",
+                    "description": "Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.",
                     "items": {
                       "description": "KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \"signing\", \"digital signature\", \"content commitment\", \"key encipherment\", \"key agreement\", \"data encipherment\", \"cert sign\", \"crl sign\", \"encipher only\", \"decipher only\", \"any\", \"server auth\", \"client auth\", \"code signing\", \"email protection\", \"s/mime\", \"ipsec end system\", \"ipsec tunnel\", \"ipsec user\", \"timestamping\", \"ocsp signing\", \"microsoft sgc\", \"netscape sgc\"",
                       "enum": [
@@ -347,19 +362,20 @@
                 "type": "object"
               },
               "status": {
-                "description": "CertificateStatus defines the observed state of CertificateRequest and resulting signed certificate.",
+                "description": "Status of the CertificateRequest. This is set and managed automatically.",
                 "properties": {
                   "ca": {
-                    "description": "Byte slice containing the PEM encoded certificate authority of the signed certificate.",
+                    "description": "The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.",
                     "format": "byte",
                     "type": "string"
                   },
                   "certificate": {
-                    "description": "Byte slice containing a PEM encoded signed certificate resulting from the given certificate signing request.",
+                    "description": "The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.",
                     "format": "byte",
                     "type": "string"
                   },
                   "conditions": {
+                    "description": "List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.",
                     "items": {
                       "description": "CertificateRequestCondition contains condition information for a CertificateRequest.",
                       "properties": {
@@ -386,7 +402,7 @@
                           "type": "string"
                         },
                         "type": {
-                          "description": "Type of the condition, currently ('Ready', 'InvalidRequest').",
+                          "description": "Type of the condition, known values are ('Ready', 'InvalidRequest').",
                           "type": "string"
                         }
                       },
@@ -415,6 +431,392 @@
         "subresources": {
           "status": {}
         }
+      },
+      {
+        "additionalPrinterColumns": [
+          {
+            "jsonPath": ".status.conditions[?(@.type==\"Ready\")].status",
+            "name": "Ready",
+            "type": "string"
+          },
+          {
+            "jsonPath": ".spec.issuerRef.name",
+            "name": "Issuer",
+            "priority": 1,
+            "type": "string"
+          },
+          {
+            "jsonPath": ".status.conditions[?(@.type==\"Ready\")].message",
+            "name": "Status",
+            "priority": 1,
+            "type": "string"
+          },
+          {
+            "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.",
+            "jsonPath": ".metadata.creationTimestamp",
+            "name": "Age",
+            "type": "date"
+          }
+        ],
+        "name": "v1beta1",
+        "schema": {
+          "openAPIV3Schema": {
+            "description": "A CertificateRequest is used to request a signed certificate from one of the configured issuers. \n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.",
+            "properties": {
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
+              },
+              "metadata": {
+                "type": "object"
+              },
+              "spec": {
+                "description": "Desired state of the CertificateRequest resource.",
+                "properties": {
+                  "duration": {
+                    "description": "The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.",
+                    "type": "string"
+                  },
+                  "isCA": {
+                    "description": "IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.",
+                    "type": "boolean"
+                  },
+                  "issuerRef": {
+                    "description": "IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.",
+                    "properties": {
+                      "group": {
+                        "description": "Group of the resource being referred to.",
+                        "type": "string"
+                      },
+                      "kind": {
+                        "description": "Kind of the resource being referred to.",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Name of the resource being referred to.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "type": "object"
+                  },
+                  "request": {
+                    "description": "The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.",
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "usages": {
+                    "description": "Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.",
+                    "items": {
+                      "description": "KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \"signing\", \"digital signature\", \"content commitment\", \"key encipherment\", \"key agreement\", \"data encipherment\", \"cert sign\", \"crl sign\", \"encipher only\", \"decipher only\", \"any\", \"server auth\", \"client auth\", \"code signing\", \"email protection\", \"s/mime\", \"ipsec end system\", \"ipsec tunnel\", \"ipsec user\", \"timestamping\", \"ocsp signing\", \"microsoft sgc\", \"netscape sgc\"",
+                      "enum": [
+                        "signing",
+                        "digital signature",
+                        "content commitment",
+                        "key encipherment",
+                        "key agreement",
+                        "data encipherment",
+                        "cert sign",
+                        "crl sign",
+                        "encipher only",
+                        "decipher only",
+                        "any",
+                        "server auth",
+                        "client auth",
+                        "code signing",
+                        "email protection",
+                        "s/mime",
+                        "ipsec end system",
+                        "ipsec tunnel",
+                        "ipsec user",
+                        "timestamping",
+                        "ocsp signing",
+                        "microsoft sgc",
+                        "netscape sgc"
+                      ],
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "issuerRef",
+                  "request"
+                ],
+                "type": "object"
+              },
+              "status": {
+                "description": "Status of the CertificateRequest. This is set and managed automatically.",
+                "properties": {
+                  "ca": {
+                    "description": "The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.",
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "certificate": {
+                    "description": "The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.",
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "conditions": {
+                    "description": "List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.",
+                    "items": {
+                      "description": "CertificateRequestCondition contains condition information for a CertificateRequest.",
+                      "properties": {
+                        "lastTransitionTime": {
+                          "description": "LastTransitionTime is the timestamp corresponding to the last status change of this condition.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "Message is a human readable description of the details of the last transition, complementing reason.",
+                          "type": "string"
+                        },
+                        "reason": {
+                          "description": "Reason is a brief machine readable explanation for the condition's last transition.",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "Status of the condition, one of ('True', 'False', 'Unknown').",
+                          "enum": [
+                            "True",
+                            "False",
+                            "Unknown"
+                          ],
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Type of the condition, known values are ('Ready', 'InvalidRequest').",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "type"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "failureTime": {
+                    "description": "FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.",
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "required": [
+              "spec"
+            ],
+            "type": "object"
+          }
+        },
+        "served": true,
+        "storage": false,
+        "subresources": {
+          "status": {}
+        }
+      },
+      {
+        "additionalPrinterColumns": [
+          {
+            "jsonPath": ".status.conditions[?(@.type==\"Ready\")].status",
+            "name": "Ready",
+            "type": "string"
+          },
+          {
+            "jsonPath": ".spec.issuerRef.name",
+            "name": "Issuer",
+            "priority": 1,
+            "type": "string"
+          },
+          {
+            "jsonPath": ".status.conditions[?(@.type==\"Ready\")].message",
+            "name": "Status",
+            "priority": 1,
+            "type": "string"
+          },
+          {
+            "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.",
+            "jsonPath": ".metadata.creationTimestamp",
+            "name": "Age",
+            "type": "date"
+          }
+        ],
+        "name": "v1",
+        "schema": {
+          "openAPIV3Schema": {
+            "description": "A CertificateRequest is used to request a signed certificate from one of the configured issuers. \n All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.",
+            "properties": {
+              "apiVersion": {
+                "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                "type": "string"
+              },
+              "metadata": {
+                "type": "object"
+              },
+              "spec": {
+                "description": "Desired state of the CertificateRequest resource.",
+                "properties": {
+                  "duration": {
+                    "description": "The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.",
+                    "type": "string"
+                  },
+                  "isCA": {
+                    "description": "IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.",
+                    "type": "boolean"
+                  },
+                  "issuerRef": {
+                    "description": "IssuerRef is a reference to the issuer for this CertificateRequest.  If the 'kind' field is not set, or set to 'Issuer', an Issuer resource with the given name in the same namespace as the CertificateRequest will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer with the provided name will be used. The 'name' field in this stanza is required at all times. The group field refers to the API group of the issuer which defaults to 'cert-manager.io' if empty.",
+                    "properties": {
+                      "group": {
+                        "description": "Group of the resource being referred to.",
+                        "type": "string"
+                      },
+                      "kind": {
+                        "description": "Kind of the resource being referred to.",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Name of the resource being referred to.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "type": "object"
+                  },
+                  "request": {
+                    "description": "The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.",
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "usages": {
+                    "description": "Usages is the set of x509 usages that are requested for the certificate. If usages are set they SHOULD be encoded inside the CSR spec Defaults to `digital signature` and `key encipherment` if not specified.",
+                    "items": {
+                      "description": "KeyUsage specifies valid usage contexts for keys. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12 Valid KeyUsage values are as follows: \"signing\", \"digital signature\", \"content commitment\", \"key encipherment\", \"key agreement\", \"data encipherment\", \"cert sign\", \"crl sign\", \"encipher only\", \"decipher only\", \"any\", \"server auth\", \"client auth\", \"code signing\", \"email protection\", \"s/mime\", \"ipsec end system\", \"ipsec tunnel\", \"ipsec user\", \"timestamping\", \"ocsp signing\", \"microsoft sgc\", \"netscape sgc\"",
+                      "enum": [
+                        "signing",
+                        "digital signature",
+                        "content commitment",
+                        "key encipherment",
+                        "key agreement",
+                        "data encipherment",
+                        "cert sign",
+                        "crl sign",
+                        "encipher only",
+                        "decipher only",
+                        "any",
+                        "server auth",
+                        "client auth",
+                        "code signing",
+                        "email protection",
+                        "s/mime",
+                        "ipsec end system",
+                        "ipsec tunnel",
+                        "ipsec user",
+                        "timestamping",
+                        "ocsp signing",
+                        "microsoft sgc",
+                        "netscape sgc"
+                      ],
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "issuerRef",
+                  "request"
+                ],
+                "type": "object"
+              },
+              "status": {
+                "description": "Status of the CertificateRequest. This is set and managed automatically.",
+                "properties": {
+                  "ca": {
+                    "description": "The PEM encoded x509 certificate of the signer, also known as the CA (Certificate Authority). This is set on a best-effort basis by different issuers. If not set, the CA is assumed to be unknown/not available.",
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "certificate": {
+                    "description": "The PEM encoded x509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the `conditions` field.",
+                    "format": "byte",
+                    "type": "string"
+                  },
+                  "conditions": {
+                    "description": "List of status conditions to indicate the status of a CertificateRequest. Known condition types are `Ready` and `InvalidRequest`.",
+                    "items": {
+                      "description": "CertificateRequestCondition contains condition information for a CertificateRequest.",
+                      "properties": {
+                        "lastTransitionTime": {
+                          "description": "LastTransitionTime is the timestamp corresponding to the last status change of this condition.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "message": {
+                          "description": "Message is a human readable description of the details of the last transition, complementing reason.",
+                          "type": "string"
+                        },
+                        "reason": {
+                          "description": "Reason is a brief machine readable explanation for the condition's last transition.",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "Status of the condition, one of ('True', 'False', 'Unknown').",
+                          "enum": [
+                            "True",
+                            "False",
+                            "Unknown"
+                          ],
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Type of the condition, known values are ('Ready', 'InvalidRequest').",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "type"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "failureTime": {
+                    "description": "FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.",
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "required": [
+              "spec"
+            ],
+            "type": "object"
+          }
+        },
+        "served": true,
+        "storage": true,
+        "subresources": {
+          "status": {}
+        }
       }
     ]
   },
@@ -431,14 +833,14 @@
     },
     "conditions": [
       {
-        "lastTransitionTime": "2020-05-02T17:12:34Z",
+        "lastTransitionTime": "2020-05-08T12:37:59Z",
         "message": "no conflicts found",
         "reason": "NoConflicts",
         "status": "True",
         "type": "NamesAccepted"
       },
       {
-        "lastTransitionTime": "2020-05-02T17:12:34Z",
+        "lastTransitionTime": "2020-05-08T12:37:59Z",
         "message": "the initial names have been accepted",
         "reason": "InitialNamesAccepted",
         "status": "True",
@@ -446,7 +848,8 @@
       }
     ],
     "storedVersions": [
-      "v1alpha2"
+      "v1alpha2",
+      "v1"
     ]
   }
 }
