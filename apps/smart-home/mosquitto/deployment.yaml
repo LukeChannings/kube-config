@@ -27,7 +27,7 @@ spec:
                       - sentinel
       containers:
         - name: mosquitto
-          image: eclipse-mosquitto:1.6.12
+          image: eclipse-mosquitto:2.0.1
           ports:
             - containerPort: 8883
               name: mqtts
@@ -56,6 +56,13 @@ spec:
             - mountPath: /secret
               name: password-secret
               readOnly: true
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 500m
+              memory: 256Mi
       restartPolicy: Always
       volumes:
         - name: mosquitto-persistence

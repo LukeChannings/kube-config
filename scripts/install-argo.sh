@@ -23,10 +23,10 @@ argocd login localhost:8080 --username admin --password "$PASSWORD"
 
 kubectl apply -f "${CWD}/secrets/kubernetes-sealed-secret-master.key"
 
+argocd repo add https://charts.helm.sh/stable --type helm --name stable
 argocd repo add https://haproxytech.github.io/helm-charts/ --type helm --name haproxytech
 argocd repo add https://charts.jetstack.io/ --type helm --name jetstack
-argocd repo add https://charts.helm.sh/stable --type helm --name stable
-argocd repo add https://grafana.github.io/loki/charts --type helm --name loki
+argocd repo add https://k8s-at-home.com/charts/ --type helm --name k8s-at-home
 
 argocd repo add git@github.com:LukeChannings/kube-config-private.git --insecure-ignore-host-key --ssh-private-key-path "${CWD}/secrets/argocd-github"
 argocd repo add git@github.com:LukeChannings/kube-config.git --insecure-ignore-host-key --ssh-private-key-path "${CWD}/secrets/argocd-github"

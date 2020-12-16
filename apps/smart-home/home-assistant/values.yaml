@@ -1,7 +1,7 @@
 ---
 home-assistant:
   image:
-    tag: 0.116.4
+    tag: 0.118.3
   ingress:
     enabled: true
     annotations:
@@ -29,9 +29,9 @@ home-assistant:
       name: "Luke Channings"
       email: "luke+k8s-hass-sync@channings.me"
   monitoring:
-    enabled: true
+    enabled: false
     serviceMonitor:
-      enabled: true
+      enabled: false
       bearerTokenSecret:
         key: hass-token
         name: home-assistant-service-monitor
