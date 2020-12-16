@@ -12,6 +12,7 @@ if ! [ -L .git/hooks/pre-commit ]; then
   ln -s "$(pwd)/scripts/lint.sh" .git/hooks/pre-commit
 fi
 
+helm repo add k8s-at-home https://k8s-at-home.com/charts/
 helm repo add stable https://charts.helm.sh/stable
 helm repo add haproxytech https://haproxytech.github.io/helm-charts/
 helm repo add jetstack https://charts.jetstack.io/
