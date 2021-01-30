@@ -8,6 +8,15 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteMany
-  nfs:
-    server: 192.168.1.7
-    path: "/data/home-assistant-config"
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /data/home-assistant-config
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - suplex

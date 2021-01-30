@@ -9,4 +9,5 @@ spec:
       storage: 1Gi
   accessModes:
     - ReadWriteMany
-  storageClassName: ""
+  storageClassName: "local-storage"
+  volumeName: home-assistant-config
