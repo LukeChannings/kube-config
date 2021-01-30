@@ -8,7 +8,7 @@ ssh -t Suplex "sudo bash -c 'cp /var/lib/rancher/k3s/server/node-token /home/luk
 scp Suplex:~/node-token ~/.nodetoken
 
 # shellcheck disable=SC2029
-ssh -t Snowkube "curl -sfL https://get.k3s.io | K3S_URL=https://suplex.local:6443 K3S_TOKEN='$(cat ~/.nodetoken)' sh -" || true
+#ssh -t Snowkube "curl -sfL https://get.k3s.io | K3S_URL=https://suplex.local:6443 K3S_TOKEN='$(cat ~/.nodetoken)' sh -" || true
 
 # shellcheck disable=SC2029
 ssh -t Sentinel "curl -sfL https://get.k3s.io | K3S_URL=https://suplex.local:6443 K3S_TOKEN='$(cat ~/.nodetoken)' sh -" || true

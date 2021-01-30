@@ -9,5 +9,5 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 10.10.10.3
+    server: 192.168.1.7
     path: "/data/config/unifi-controller"
