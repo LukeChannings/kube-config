@@ -10,7 +10,7 @@ spec:
     - ReadWriteMany
   storageClassName: local-storage
   local:
-    path: /data/unifi-controller
+    path: /data/config/unifi-controller
   nodeAffinity:
     required:
       nodeSelectorTerms:
