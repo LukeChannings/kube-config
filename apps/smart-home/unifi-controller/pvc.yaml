@@ -10,5 +10,5 @@ spec:
       storage: 10Gi
   accessModes:
     - ReadWriteMany
-  storageClassName: ""
+  storageClassName: "local-storage"
   volumeName: unifi-config

@@ -8,6 +8,14 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
-  nfs:
-    server: 192.168.1.7
-    path: "/data/config/unifi-controller"
+  storageClassName: local-storage
+  local:
+    path: /data/unifi-controller
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - suplex
