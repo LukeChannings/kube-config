@@ -1,6 +1,6 @@
 # Luke's kubeconfig
 
-![Lint Status](https://github.com/LukeChannings/kube-config/workflows/Lint/badge.svg?branch=master)
+![Lint Status](https://github.com/LukeChannings/kube-config/workflows/Lint/badge.svg?branch=main)
 
 All of these scripts and configurations are specific to my home cluster. Do not expect any configurations to "just work" if you plan on using them.
 
@@ -58,11 +58,11 @@ I test with:
 Run `ip a` and note the IP address, and then run `iperf -s` on one of the pods.
 Use `iperf -c <IP>` on all other nodes. They should all be communicating at roughly network speeds.
 
-Note: [`krun`](https://github.com/LukeChannings/.config/blob/master/fish/functions/krun.fish) is a custom fish script.
+Note: [`krun`](https://github.com/LukeChannings/dotfiles/blob/main/fish/functions/krun.fish) is a custom fish script.
 
 If you find there is no communication between nodes, try:
 
-1. restarting k3s: `sudo systemctl restart k3s` on the master node
+1. restarting k3s: `sudo systemctl restart k3s` on the main node
 2. Restarting all nodes
 3. Destroying the cluster and starting again
 4. Ensure routes are correctly set up on the nodes, iptables is configured, etc. See also: [k3s known issues](https://rancher.com/docs/k3s/latest/en/known-issues/)
