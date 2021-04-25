@@ -15,6 +15,5 @@ spec:
   project: default
   syncPolicy:
     automated:
-      automated:
-        prune: false
-        selfHeal: false
+      prune: false
+      selfHeal: false
