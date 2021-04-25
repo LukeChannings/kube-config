@@ -20,7 +20,7 @@ spec:
       http:
         paths:
           - path: /
-            pathType: null
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: argocd-server
