@@ -29,7 +29,7 @@ spec:
                       - sentinel
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:1.17.0
+          image: koenkk/zigbee2mqtt:1.18.2
           imagePullPolicy: Always
           env:
             - name: TZ
