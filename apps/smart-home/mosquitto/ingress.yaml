@@ -20,12 +20,16 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: mosquitto
-              servicePort: mqtts
+              service:
+                name: mosquitto
+                port:
+                  name: mqtts
     - host: mqttws.private.channings.me
       http:
         paths:
           - path: /
             backend:
-              serviceName: mosquitto
-              servicePort: wss
+              service:
+                name: mosquitto
+                port:
+                  name: wss

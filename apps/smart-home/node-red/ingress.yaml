@@ -20,5 +20,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: node-red
-              servicePort: http
+              service:
+                name: node-red
+                port:
+                  name: http

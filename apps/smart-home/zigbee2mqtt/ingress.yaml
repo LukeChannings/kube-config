@@ -18,5 +18,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: zigbee2mqtt
-              servicePort: http
+              service:
+                name: zigbee2mqtt
+                port:
+                  name: http

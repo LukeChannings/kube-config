@@ -18,9 +18,13 @@ spec:
         paths:
           - path: /api/alexa/smart_home
             backend:
-              serviceName: home-assistant
-              servicePort: 8123
+              service:
+                name: home-assistant
+                port:
+                  number: 8123
           - path: /auth
             backend:
-              serviceName: home-assistant
-              servicePort: 8123
+              service:
+                name: home-assistant
+                port:
+                  number: 8123
