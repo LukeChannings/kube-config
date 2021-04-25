@@ -13,14 +13,15 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 echo "Waiting for argocd to be available..."
 
-kubectl wait --for=condition=Available deployment -n argocd argocd-server
+kubectl wait --for=condition=Available deployment -n argocd argocd-server --timeout=10m
 
 kubectl port-forward svc/argocd-server -n argocd 8080:443 &
 PORT_FORWARD_PID=$!
 
-PASSWORD="$(kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2)"
+PASSWORD="$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
 argocd login localhost:8080 --username admin --password "$PASSWORD"
 
+kubectl create namespace sealed-secrets || true
 kubectl apply -f "${CWD}/secrets/kubernetes-sealed-secret-master.key"
 
 argocd repo add https://charts.helm.sh/stable --type helm --name stable
@@ -44,7 +45,6 @@ argocd app sync apps
 argocd app sync argocd --strategy apply; sleep 2
 argocd app sync sealed-secrets --strategy apply; sleep 2
 argocd app sync cert-manager --strategy apply; sleep 2
-argocd app sync monitoring --strategy apply; sleep 2
 argocd app sync haproxy-ingress --strategy apply; sleep 2
 
 kill $PORT_FORWARD_PID
