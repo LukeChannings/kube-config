@@ -21,5 +21,7 @@ spec:
           - path: /
             pathType: ImplementationSpecific
             backend:
-              serviceName: controller
-              servicePort: https
+              service:
+                name: controller
+                port:
+                  name: https
