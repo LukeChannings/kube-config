@@ -16,13 +16,15 @@ spec:
     - host: home-assistant.channings.me
       http:
         paths:
-          - path: /api/alexa/smart_home
+          - pathType: ImplementationSpecific
+            path: /api/alexa/smart_home
             backend:
               service:
                 name: home-assistant
                 port:
                   number: 8123
-          - path: /auth
+          - pathType: ImplementationSpecific
+            path: /auth
             backend:
               service:
                 name: home-assistant
