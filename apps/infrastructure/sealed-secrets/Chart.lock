@@ -1,6 +1,6 @@
 dependencies:
 - name: sealed-secrets
-  repository: https://charts.helm.sh/stable
-  version: 1.12.2
-digest: sha256:9c2b078ab93acab2918349548783d11132e1cd3d82ae2d8a3daa01e0fc042966
-generated: "2020-12-16T13:20:05.260555-05:00"
+  repository: https://bitnami-labs.github.io/sealed-secrets
+  version: 1.16.1
+digest: sha256:918845bea480547f9e51957aa82f91bbe4620f5cf7f7650ed7d9ffbd3f21e741
+generated: "2021-06-24T17:22:26.495709+01:00"
