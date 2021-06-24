@@ -15,11 +15,8 @@ spec:
           dnsZones:
             - "channings.me"
         dns01:
-          route53:
-            region: eu-west-1
-            hostedZoneID: ZQBGIDI8VLBF2
-            accessKeyID: AKIAJPS35VLRNG4O5IOQ
-            secretAccessKeySecretRef:
-              name: cert-manager-secret-access-key
-              key: aws_secret_access_key
-            role: arn:aws:iam::236205202378:role/cert-manager
+          cloudflare:
+            email: luke@channings.me
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token
