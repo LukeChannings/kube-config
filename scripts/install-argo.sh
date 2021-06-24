@@ -28,6 +28,7 @@ argocd repo add https://charts.helm.sh/stable --type helm --name stable
 argocd repo add https://haproxytech.github.io/helm-charts/ --type helm --name haproxytech
 argocd repo add https://charts.jetstack.io/ --type helm --name jetstack
 argocd repo add https://k8s-at-home.com/charts/ --type helm --name k8s-at-home
+argocd repo add https://bitnami-labs.github.io/sealed-secrets/ --type helm --name sealed-secrets
 
 argocd repo add git@github.com:LukeChannings/kube-config-private.git --insecure-ignore-host-key --ssh-private-key-path "${CWD}/secrets/argocd-github"
 argocd repo add git@github.com:LukeChannings/kube-config.git --insecure-ignore-host-key --ssh-private-key-path "${CWD}/secrets/argocd-github"

@@ -5,10 +5,10 @@ name: ingress-controller
 dependencies:
   # https://github.com/haproxytech/helm-charts/tree/master/kubernetes-ingress
   - name: kubernetes-ingress
-    version: 1.13.0
+    version: 1.15.4
     repository: https://haproxytech.github.io/helm-charts
     alias: internal
   - name: kubernetes-ingress
-    version: 1.13.0
+    version: 1.15.4
     repository: https://haproxytech.github.io/helm-charts
     alias: external
