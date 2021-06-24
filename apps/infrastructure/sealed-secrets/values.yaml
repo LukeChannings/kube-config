@@ -1,0 +1,4 @@
+---
+sealed-secrets:
+  commandArgs:
+    - "--update-status"

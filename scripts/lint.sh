@@ -16,6 +16,7 @@ helm repo add k8s-at-home https://k8s-at-home.com/charts/
 helm repo add stable https://charts.helm.sh/stable
 helm repo add haproxytech https://haproxytech.github.io/helm-charts/
 helm repo add jetstack https://charts.jetstack.io/
+helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets/
 
 while IFS= read -d '' -r file; do
   if ! dirname "$file" | grep -q 'cert-manager'; then
