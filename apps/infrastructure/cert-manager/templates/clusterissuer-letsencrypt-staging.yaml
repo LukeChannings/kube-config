@@ -1,0 +1,22 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+  namespace: cert-manager
+spec:
+  acme:
+    email: luke@channings.me
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging-issuer-account-key
+    solvers:
+      - selector:
+          dnsZones:
+            - "channings.me"
+        dns01:
+          cloudflare:
+            email: luke@channings.me
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token

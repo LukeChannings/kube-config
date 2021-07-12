@@ -43,9 +43,9 @@ argocd app create \
 
 argocd app sync apps
 
-argocd app sync argocd --strategy apply; sleep 2
 argocd app sync sealed-secrets --strategy apply; sleep 2
 argocd app sync cert-manager --strategy apply; sleep 2
 argocd app sync haproxy-ingress --strategy apply; sleep 2
+argocd app sync argocd --strategy apply; sleep 2
 
 kill $PORT_FORWARD_PID

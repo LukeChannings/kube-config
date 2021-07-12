@@ -5,7 +5,7 @@ home-assistant:
   ingress:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-production
+      cert-manager.io/cluster-issuer: letsencrypt-staging
       kubernetes.io/ingress.class: internal
     path: /
     hosts:

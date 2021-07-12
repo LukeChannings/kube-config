@@ -5,7 +5,7 @@ metadata:
   name: unifi-controller
   namespace: unifi
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
     kubernetes.io/ingress.class: internal
     haproxy.org/server-ssl: "true"
     haproxy.org/ssl-redirect: "true"
