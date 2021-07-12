@@ -5,7 +5,7 @@ metadata:
   name: home-assistant-alexa
   namespace: home-assistant
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    cert-manager.io/cluster-issuer: zerossl-production
     kubernetes.io/ingress.class: external
 spec:
   tls:
