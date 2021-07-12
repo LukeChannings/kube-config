@@ -10,6 +10,7 @@ spec:
     server: https://acme.zerossl.com/v2/DV90
     externalAccountBinding:
       keyID: rFF9EQHaAtM4lcE1s-UqPQ
+      keyAlgorithm: HS256
       keySecretRef:
         name: zerossl-api-token-secret
         key: external-account-binding-key
