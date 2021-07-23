@@ -51,7 +51,6 @@ paperless:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
         kubernetes.io/ingress.class: internal
-        haproxy.org/ssl-passthrough: "true"
 
       labels:
         app.kubernetes.io/name: argocd
