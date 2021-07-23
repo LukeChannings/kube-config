@@ -73,7 +73,7 @@ paperless:
                 # -- Overrides the service name reference for this path
                 name: paperless
                 # -- Overrides the service port reference for this path
-                port: http
+                port: 8000
 
       # -- Configure TLS for the ingress. Both secretName and hosts can process a Helm template.
       tls:
