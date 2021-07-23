@@ -57,7 +57,7 @@ paperless:
 
       # -- Set the ingressClass that is used for this ingress.
       # Requires Kubernetes >=1.19
-      ingressClassName: internal
+      # ingressClassName: internal
 
       ## Configure the hosts for the ingress
       hosts:
