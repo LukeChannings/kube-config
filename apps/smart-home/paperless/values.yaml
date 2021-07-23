@@ -1,3 +1,4 @@
+---
 paperless:
   #
   # IMPORTANT NOTE
@@ -68,7 +69,7 @@ paperless:
             -  # -- Path.  Helm template can be passed.
               path: /
               # -- Ignored if not kubeVersion >= 1.14-0
-              pathType: Prefix
+              pathType: ImplementationSpecific
               service:
                 # -- Overrides the service name reference for this path
                 name: paperless
@@ -77,9 +78,9 @@ paperless:
 
       # -- Configure TLS for the ingress. Both secretName and hosts can process a Helm template.
       tls:
-       - secretName: paperless-tls
-         hosts:
-           - paperless.private.channings.me
+        - secretName: paperless-tls
+          hosts:
+            - paperless.private.channings.me
 
   persistence:
     # -- Configure persistence for data.
