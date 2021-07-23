@@ -85,7 +85,7 @@ paperless:
     # -- Configure persistence for data.
     # @default -- See values.yaml
     data:
-      enabled: false
+      enabled: true
       mountPath: /usr/src/paperless/data
       accessMode: ReadWriteOnce
       type: pvc
