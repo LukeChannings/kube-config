@@ -15,12 +15,11 @@ data:
     persistence_location /mosquitto/data/
 
     # MQTT
-    port 1883
-    bind_address 0.0.0.0
+    listener 1883 0.0.0.0
     protocol mqtt
 
     # MQTTS
-    listener 8883
+    listener 8883 0.0.0.0
     protocol mqtt
     capath /etc/ssl/certs
     certfile /tls/tls.crt
