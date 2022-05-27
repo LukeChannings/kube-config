@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ddns
+  labels:
+    app.kubernetes.io/name: ddns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ddns
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ddns
+    spec:
+      containers:
+        - name: ddns
+          image: oznu/cloudflare-ddns:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ZONE
+              valueFrom:
+                secretKeyRef:
+                  name: ddns
+                  key: ZONE
+            - name: SUBDOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: ddns
+                  key: SUBDOMAIN
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ddns
+                  key: API_KEY
+          resources:
+            limits:
+              cpu: 50m
+              memory: 64Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi

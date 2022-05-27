@@ -9,7 +9,7 @@ spec:
     email: luke@channings.me
     server: https://acme.zerossl.com/v2/DV90
     externalAccountBinding:
-      keyID: rFF9EQHaAtM4lcE1s-UqPQ
+      keyID: OP0Xh_joKX6e0YJjaic44Q
       keyAlgorithm: HS256
       keySecretRef:
         name: zerossl-api-secret
