@@ -1,6 +1,0 @@
-dependencies:
-- name: paperless
-  repository: https://k8s-at-home.com/charts/
-  version: 6.1.0
-digest: sha256:07665ce569bcc6ab30c49731cfe78ee5cd125b2a77b952bf3c726962b8cfebc9
-generated: "2021-07-23T13:16:51.386405+01:00"

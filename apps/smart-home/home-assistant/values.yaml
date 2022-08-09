@@ -1,7 +1,7 @@
 ---
 home-assistant:
   image:
-    tag: stable
+    tag: 2021.12.3
   ingress:
     enabled: true
     annotations:

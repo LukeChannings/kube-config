@@ -29,7 +29,7 @@ spec:
                       - sentinel
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:1.21.2
+          image: koenkk/zigbee2mqtt:1.27.0
           imagePullPolicy: Always
           env:
             - name: TZ
@@ -38,11 +38,7 @@ spec:
             privileged: true
           volumeMounts:
             - mountPath: /app/data
-              name: nfs-config
-            - mountPath: /app/data/configuration.yaml
-              subPath: configuration.yaml
-              name: config
-              readOnly: true
+              name: zigbee2mqtt-data
             - mountPath: /app/data/secret.yaml
               subPath: secret.yaml
               name: zigbee2mqtt-secrets
@@ -58,12 +54,9 @@ spec:
               memory: 256Mi
       restartPolicy: Always
       volumes:
-        - name: nfs-config
+        - name: zigbee2mqtt-data
           persistentVolumeClaim:
             claimName: zigbee2mqtt-data
-        - name: config
-          configMap:
-            name: zigbee2mqtt-config
         - name: zigbee2mqtt-secrets
           secret:
             secretName: zigbee2mqtt-secrets
