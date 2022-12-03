@@ -1,3 +1,4 @@
+---
 resources:
   - deployment.yaml
   - sealedsecret-ddns.yaml

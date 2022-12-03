@@ -2,11 +2,11 @@
   "apiVersion": "apiextensions.k8s.io/v1",
   "kind": "CustomResourceDefinition",
   "metadata": {
-    "creationTimestamp": "2021-07-12T12:16:34Z",
+    "creationTimestamp": "2021-12-19T00:22:13Z",
     "generation": 1,
     "name": "addons.k3s.cattle.io",
-    "resourceVersion": "222",
-    "uid": "59f3b80c-8a3f-4268-a2b1-0996e6273175"
+    "resourceVersion": "214",
+    "uid": "1baa8dc2-2e66-40e4-98c5-d81c69e08d31"
   },
   "spec": {
     "conversion": {
@@ -38,21 +38,21 @@
     },
     "conditions": [
       {
-        "lastTransitionTime": "2021-07-12T12:16:34Z",
+        "lastTransitionTime": "2021-12-19T00:22:13Z",
         "message": "spec.preserveUnknownFields: Invalid value: true: must be false",
         "reason": "Violations",
         "status": "True",
         "type": "NonStructuralSchema"
       },
       {
-        "lastTransitionTime": "2021-07-12T12:16:34Z",
+        "lastTransitionTime": "2021-12-19T00:22:13Z",
         "message": "no conflicts found",
         "reason": "NoConflicts",
         "status": "True",
         "type": "NamesAccepted"
       },
       {
-        "lastTransitionTime": "2021-07-12T12:16:34Z",
+        "lastTransitionTime": "2021-12-19T00:22:13Z",
         "message": "the initial names have been accepted",
         "reason": "InitialNamesAccepted",
         "status": "True",

@@ -2,11 +2,11 @@
   "apiVersion": "apiextensions.k8s.io/v1",
   "kind": "CustomResourceDefinition",
   "metadata": {
-    "creationTimestamp": "2021-07-12T12:16:34Z",
+    "creationTimestamp": "2021-12-19T00:22:13Z",
     "generation": 1,
     "name": "helmcharts.helm.cattle.io",
-    "resourceVersion": "223",
-    "uid": "2c56a2ca-3364-4dd2-bfa3-0d3bd25e2f33"
+    "resourceVersion": "217",
+    "uid": "99381f26-00e8-4e6a-9ed1-02d4cef1cfd3"
   },
   "spec": {
     "conversion": {
@@ -38,25 +38,25 @@
     },
     "conditions": [
       {
-        "lastTransitionTime": "2021-07-12T12:16:34Z",
+        "lastTransitionTime": "2021-12-19T00:22:13Z",
+        "message": "spec.preserveUnknownFields: Invalid value: true: must be false",
+        "reason": "Violations",
+        "status": "True",
+        "type": "NonStructuralSchema"
+      },
+      {
+        "lastTransitionTime": "2021-12-19T00:22:13Z",
         "message": "no conflicts found",
         "reason": "NoConflicts",
         "status": "True",
         "type": "NamesAccepted"
       },
       {
-        "lastTransitionTime": "2021-07-12T12:16:34Z",
+        "lastTransitionTime": "2021-12-19T00:22:14Z",
         "message": "the initial names have been accepted",
         "reason": "InitialNamesAccepted",
         "status": "True",
         "type": "Established"
-      },
-      {
-        "lastTransitionTime": "2021-07-12T12:16:34Z",
-        "message": "spec.preserveUnknownFields: Invalid value: true: must be false",
-        "reason": "Violations",
-        "status": "True",
-        "type": "NonStructuralSchema"
       }
     ],
     "storedVersions": [

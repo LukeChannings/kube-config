@@ -30,4 +30,4 @@ yamllint -c .yamllint.yaml .
 
 shellcheck -s bash ./**/*.sh
 
-kubeval -i '(Chart|values.*|requirements|.*\.crds?)\.yaml$' -d ./apps --schema-location https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/ -v 1.20.6 --additional-schema-locations file://./crds
+kubeval -i '(Chart|values.*|requirements|kustomization|.*\.crds?)\.yaml$' -d ./apps --schema-location https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/ -v 1.20.6 --additional-schema-locations file://./crds

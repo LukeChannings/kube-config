@@ -58,42 +58,8 @@ spec:
           volumeMounts:
             - mountPath: /config/data
               name: data
-          # - name: metrics
-          #   image: golift/unifi-poller:stable
-          #   ports:
-          #     - containerPort: 9130
-          #       name: stat
-          #   env:
-          #     - name: UP_INFLUXDB_DISABLE
-          #       value: "true"
-          #     - name: UP_UNIFI_DEFAULT_URL
-          #       value: "https://controller.unifi.svc.cluster.local"
-          #     - name: UP_UNIFI_DEFAULT_USER
-          #       valueFrom:
-          #         secretKeyRef:
-          #           name: poller-auth
-          #           key: POLLER_USER
-          #     - name: UP_UNIFI_DEFAULT_PASS
-          #       valueFrom:
-          #         secretKeyRef:
-          #           name: poller-auth
-          #           key: POLLER_PASS
-          #   volumeMounts:
-          #     - name: poller-config
-          #       mountPath: /config/unifi-poller.conf
-          #       subPath: unifi-poller.conf
-          #   resources:
-          #     limits:
-          #       cpu: "100m"
-          #       memory: "1Gi"
-          #     requests:
-          #       cpu: "100m"
-          #       memory: "1Gi"
       restartPolicy: Always
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: unifi-config
-          # - name: poller-config
-          #   configMap:
-          #     name: poller-config
