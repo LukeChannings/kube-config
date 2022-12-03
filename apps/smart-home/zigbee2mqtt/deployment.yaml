@@ -29,7 +29,7 @@ spec:
                       - sentinel
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:1.27.0
+          image: koenkk/zigbee2mqtt:1.28.4
           imagePullPolicy: Always
           env:
             - name: TZ
@@ -46,11 +46,8 @@ spec:
             - mountPath: /dev/ttyUSB0
               name: zstack
           resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
             requests:
-              cpu: 100m
+              cpu: 250m
               memory: 256Mi
       restartPolicy: Always
       volumes:
